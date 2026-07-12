@@ -1,6 +1,6 @@
 {
   "name": "rw-research-skill",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "license": "Apache-2.0",
   "channel": "preview",
   "skills": [
@@ -8,6 +8,7 @@
     "rw-research-question",
     "rw-literature-discovery",
     "rw-evidence-map",
+    "rw-research-novelty",
     "rw-paper-extractor",
     "rw-review-methods",
     "rw-research-design",

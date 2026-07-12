@@ -7,6 +7,7 @@ flowchart LR
   discovery["rw-literature-discovery"]
   extractor["rw-paper-extractor"]
   evidence["rw-evidence-map"]
+  novelty["rw-research-novelty"]
   review["rw-review-methods"]
   design["rw-research-design"]
   referee["rw-research-referee"]
@@ -17,6 +18,7 @@ flowchart LR
 
   router --> question
   router --> discovery
+  router --> novelty
   router --> tools
   question --> discovery
   question --> design
@@ -24,8 +26,11 @@ flowchart LR
   discovery --> evidence
   extractor --> evidence
   extractor --> review
-  evidence --> design
+  evidence --> novelty
   evidence --> write
+  novelty --> discovery
+  novelty --> design
+  novelty --> referee
   review --> evidence
   review --> referee
   design --> referee

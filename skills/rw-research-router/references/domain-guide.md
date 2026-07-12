@@ -6,6 +6,7 @@
 | 需要找文献或补论证 | 进入 rw-literature-discovery | 先建证据结论 |
 | 已有一批论文但字段未统一 | 进入 rw-paper-extractor | 直接综合 |
 | 已有结构化研究记录 | 进入 rw-evidence-map | 继续无边界检索 |
+| 已有证据图，需要形成候选创新点 | 进入 rw-research-novelty | 把 gap 直接宣布为创新 |
 | 结论或设计可能站不住 | 进入 rw-research-referee | 先润色 |
 
 ## 核心规则
