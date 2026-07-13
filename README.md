@@ -2,6 +2,28 @@
 
 Roland Wayne 提供的科研工作流 Skill。
 
+## 开始使用
+
+把下面这句话发给任意支持 Agent Skills 的 AI Agent：
+
+```text
+npx -y skills add rolandwonglonam/rw-research-skill -g --all
+```
+
+安装后对 Agent 说：
+
+```text
+请用 rw-research-router 带我新手入门。
+```
+
+在 Codex 中也可以输入：
+
+```text
+$rw-research-router 新手入门
+```
+
+新手入门一次只问一个问题。它会根据你手上的想法、文献、数据、草稿或审稿意见，选择一个主 Skill。
+
 ## v0.6.0 包含什么
 
 本包包含 16 个独立 Skill：
