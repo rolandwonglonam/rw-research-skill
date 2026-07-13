@@ -1,7 +1,7 @@
 {
   "name": "rw-research-skill",
-  "version": "0.5.0",
-  "description": "研究问题、文献、证据、创新点、设计、写作和投稿工作流。",
+  "version": "0.6.0",
+  "description": "研究问题、文献、证据、设计、主张核验、局部修订、写作和投稿工作流。",
   "author": {
     "name": "Roland Wayne"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "RW Research Skill",
     "shortDescription": "Route and carry out research workflows.",
-    "longDescription": "RW Research Skill provides thirteen standalone workflows for research questions, literature discovery, paper extraction, evidence mapping, candidate research novelty, review methods, research design, review, academic writing, author tone, journal submission, and tool selection.",
+    "longDescription": "RW Research Skill provides sixteen standalone workflows for research questions, literature discovery, paper extraction, evidence mapping, project state, claim auditing, scoped revision, research design, review, academic writing, author tone, journal submission, and tool selection.",
     "developerName": "Roland Wayne",
     "category": "Education",
     "capabilities": [],

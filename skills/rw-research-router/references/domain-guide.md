@@ -8,6 +8,9 @@
 | 已有结构化研究记录 | 进入 rw-evidence-map | 继续无边界检索 |
 | 已有证据图，需要形成候选创新点 | 进入 rw-research-novelty | 把 gap 直接宣布为创新 |
 | 结论或设计可能站不住 | 进入 rw-research-referee | 先润色 |
+| 材料分散，阶段和交接状态不清 | 进入 rw-research-passport | 把 Passport 当文献库 |
+| 需要检查来源是否支持具体句子 | 进入 rw-claim-audit | 只检查 DOI 是否存在 |
+| 只允许修改文稿中的指定段落 | 进入 rw-revision-patch | 整篇重新生成 |
 
 ## 核心规则
 

@@ -1,7 +1,7 @@
 ---
 name: rw-research-router
 description: |
-  判断科研任务所处阶段，并把它交给一个主流程。 Use when the user asks for “启动科研流程”、“这个研究任务该用什么”、“帮我选科研 skill”, or requests the rw-research-router workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
+  判断科研任务所处阶段，并把它交给一个主流程。 Use when the user asks for “新手入门”、“启动科研流程”、“这个研究任务该用什么”、“帮我选科研 skill”, or requests the rw-research-router workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---
 
 # RW Research Router
@@ -17,11 +17,22 @@ description: |
 5. 读取 `references/acceptance.md`。`references/behavior-tests.json` 只用于测试，不作为用户任务事实。
 6. 当前文献、API、报告规范和期刊要求可能变化时，打开 `references/source-map.md` 中的官方链接核验并记录日期。
 
+## 新手入门
+
+用户说“新手入门”或第一次使用本包时：
+
+1. 不展示完整 Skill 清单，不要求用户先理解工作流名称。
+2. 第一轮只问：你现在手上有什么？可按想法、文献、数据、草稿、审稿意见或“不知道”回答。
+3. 第二轮只问：你这次想得到什么结果？如果第一轮已经说清楚，不重复提问。
+4. 根据回答选择一个主 Skill，说明需要提供什么材料、做到哪里停止、怎样算完成。
+5. 用户回答“不知道”时，询问当前最卡住的一件事，不让用户自行选择 Skill。
+6. 一轮只推进一个入口。用户确认后，再进入对应 Skill。
+
 ## 工作阶段
 
 1. 保留用户原问题和预期交付物。
 2. 确认研究阶段、研究类型、现有材料、截止时间和允许使用的来源。
-3. 判断当前瓶颈属于问题、发现、提取、证据、创新、设计、审查、写作、语气、投稿或工具。
+3. 判断当前瓶颈属于问题、发现、提取、证据、创新、设计、项目状态、主张核验、审查、写作、局部修订、语气、投稿或工具。
 4. 只选择一个主 Skill，说明选择理由和未选择其他路径的原因。
 5. 列出主 Skill 开始前必须补齐的输入和停止条件。
 6. 完成当前阶段后给出一个下一步，不同时启动整条链。
@@ -40,6 +51,7 @@ description: |
 - 不确定是材料缺失还是方法错误时，先列缺口，不猜。
 - 用户提供的原始材料优先于 Skill 内的通用示例。
 - 本地集成不存在时，使用自带路由表继续。
+- 新手入门时一次只问一个问题，不把整个科研流程一次发给用户。
 
 ## 输出
 
