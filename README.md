@@ -1,75 +1,248 @@
 # RW Research Skill
 
-Roland Wayne 提供的科研工作流 Skill。
+把研究问题、文献、证据、研究设计、论文草稿和投稿材料，变成当前可以核验和继续推进的一步。
 
-## 开始使用
+RW Research Skill 由 Roland Wayne 创建。当前包含 16 个科研 Skill、356 条知识原子、119 条公理、89 个案例和反例，以及 89 个行为测试。
 
-把下面这句话发给任意支持 Agent Skills 的 AI Agent：
+适用于手上有研究想法、论文、数据、研究方案、章节草稿或审稿意见，需要判断下一步的人。你可以直接提交材料，也可以只说现在卡在哪里。系统会选择一个主 Skill，每次处理当前一步。
 
-```text
-npx -y skills add rolandwonglonam/rw-research-skill -g --all
-```
+当前版本：`v0.6.0`
 
-安装后对 Agent 说：
+[新手从这里开始](#新手从这里开始) · [安装](#安装) · [常见场景](#常见场景与当前入口) · [全部 Skill](#直接调用的-skill) · [项目状态](#项目状态与接续) · [本地构建](#本地构建)
 
-```text
-请用 rw-research-router 带我新手入门。
-```
+## 你可以用它做什么
 
-在 Codex 中也可以输入：
+| 你交付的内容 | RW Research Skill 会处理什么 |
+| --- | --- |
+| 一个还没定下来的研究兴趣 | 界定对象、构念、边界和可证伪条件，形成研究问题 |
+| 一组需要查找或整理的文献 | 设计检索、核验来源、提取字段，并组织证据关系 |
+| 文献中的冲突、空白或异常 | 区分缺证据和真冲突，生成并筛选候选创新点 |
+| 一个研究方案或方法选择 | 检查设计、样本、测量、分析和替代解释 |
+| 一篇论文或章节草稿 | 根据已有材料组织论证，检查语气、来源支持和修改范围 |
+| 一组审稿意见 | 拆分修改任务，只改批准的内容，并保留核验记录 |
+| 一个持续推进的研究项目 | 保存材料、判断、未知项、阶段、交接和变更记录 |
+| 一个需要选择工具的科研任务 | 根据任务、数据和环境选择工具，不把工具当成研究判断 |
+
+## 新手从这里开始
+
+安装后，在 Codex 中输入：
 
 ```text
 $rw-research-router 新手入门
 ```
 
-新手入门一次只问一个问题。它会根据你手上的想法、文献、数据、草稿或审稿意见，选择一个主 Skill。
+在其他支持 Agent Skills 的 Agent 中，直接说：
 
-## v0.6.0 包含什么
+```text
+请用 rw-research-router 带我新手入门。
+```
 
-本包包含 16 个独立 Skill：
+新手入口不会先展示全部 Skill。它会一次问一个问题，先确认你手上有什么，再确认这次想得到什么结果，然后选择一个主 Skill。
 
-- `rw-research-router`、`rw-research-question`。
-- `rw-literature-discovery`、`rw-paper-extractor`、`rw-evidence-map`、`rw-research-novelty`。
-- `rw-review-methods`、`rw-research-design`、`rw-research-referee`。
-- `rw-research-passport`、`rw-claim-audit`、`rw-revision-patch`。
-- `rw-phd-write`、`rw-phd-tone`、`rw-journal-submission`。
-- `rw-research-lab-router`。
+你也可以直接提交任务：
 
-这些 Skill 处理研究问题、文献发现、论文提取、证据整理、候选创新点生成与筛选、综述方法、研究设计、研究状态、主张核验、局部修订、研究审查、学术写作、作者语气、期刊投稿和科研工具选择。
+```text
+我只有一个研究想法，还没有形成研究问题：……
+我有一批文献，需要判断应该先提取什么：……
+这些研究的结果互相冲突，我想找能继续验证的方向：……
+这是我的研究设计，请在执行前找出漏洞：……
+这段论文引用了 3 篇文献，帮我检查来源是否支持这些说法：……
+这是审稿意见和原稿，只修改指定段落：……
+```
+
+完成当前一步后，再次使用 `rw-research-router`。它会根据刚得到的结果选择下一步，不预先排出一条固定流程。
+
+## 安装
+
+### Codex、Claude Code 和其他支持 Agent Skills 的 Agent
+
+安装全部 16 个 Skill：
+
+```bash
+npx -y skills add rolandwonglonam/rw-research-skill -g --all
+```
+
+只安装研究入口：
+
+```bash
+npx -y skills add rolandwonglonam/rw-research-skill -g --skill rw-research-router
+```
+
+查看仓库中可以安装的 Skill：
+
+```bash
+npx -y skills add rolandwonglonam/rw-research-skill --list
+```
+
+安装后没有立即出现新入口时，新建一次对话再使用。
+
+### 更新
+
+已经通过 `skills` CLI 安装时，可以让 Agent 执行：
+
+```bash
+npx -y skills update
+```
+
+更新前可以检查已安装 Skill 是否有新版本：
+
+```bash
+npx -y skills check
+```
+
+## 常见场景与当前入口
+
+RW Research Skill 每次选择一个主流程。下面使用 `$skill-name` 表示 Codex 入口；在其他 Agent 中可以直接说“使用 skill-name”。
+
+### 不知道从哪里开始
+
+```text
+$rw-research-router 新手入门
+```
+
+入口会判断当前瓶颈属于研究问题、文献、提取、证据、创新、设计、项目状态、主张核验、写作、局部修订、投稿还是工具选择。
+
+### 从研究兴趣形成问题
+
+```text
+$rw-research-question 我想研究……，帮我把它变成可检索、可证伪的问题。
+```
+
+先确认对象、构念、边界和可能推翻结论的证据，再决定是否进入文献发现或研究设计。
+
+### 查找并整理文献
+
+```text
+$rw-literature-discovery 为这个判断寻找并核验文献：……
+$rw-paper-extractor 从这些论文中提取研究设计、样本、测量和结果。
+$rw-evidence-map 把这些研究的支持、冲突、偏倚和缺口连起来。
+```
+
+文献存在、字段提取和证据关系分开处理。找到论文不等于论文支持当前主张。
+
+### 从证据空白形成研究方向
+
+```text
+$rw-research-novelty 根据这组证据冲突，生成可以继续验证的候选创新点。
+```
+
+候选方向需要标出证据来源、贡献、可行性和证伪条件。没有完成检索时，不使用“首次”或“从未研究”等表述。
+
+### 设计研究或投稿前找漏洞
+
+```text
+$rw-research-design 把这个研究问题转成设计、样本、测量和分析计划。
+$rw-research-referee 在执行前检查偏倚、替代解释和结论边界。
+```
+
+研究设计负责形成方案；研究审查负责攻击方案。两者不在同一步混用。
+
+### 写作、核验和局部修改
+
+```text
+$rw-phd-write 根据这些材料组织 Discussion，不补造来源。
+$rw-phd-tone 保留我的学术语气，只改影响理解的部分。
+$rw-claim-audit 检查每个事实主张是否被指定来源原文支持。
+$rw-revision-patch 只修改我批准的 Markdown 段落，其他内容保持不动。
+```
+
+写作、语气、来源核验和局部修改各自保留边界。需要改稿时，先确认问题属于哪一层。
+
+### 准备投稿
+
+```text
+$rw-journal-submission 核验目标期刊要求，并整理投稿文件和审稿回复。
+```
+
+期刊要求、费用、政策和投稿入口可能变化。执行时回到期刊官方页面核验日期和版本。
+
+### 管理项目状态或选择科研工具
+
+```text
+$rw-research-passport 为这个研究项目建立可以交接的状态档案。
+$rw-research-lab-router 根据任务、数据和当前环境选择工具。
+```
+
+项目状态保存研究材料和判断；工具路由只负责执行环境，不代替研究设计。
+
+## 直接调用的 Skill
+
+| 目标 | Skill |
+| --- | --- |
+| 判断当前研究阶段和下一步 | `rw-research-router` |
+| 把研究兴趣变成问题 | `rw-research-question` |
+| 发现并核验文献 | `rw-literature-discovery` |
+| 从论文和补充材料提取字段 | `rw-paper-extractor` |
+| 整理证据关系、冲突、偏倚和缺口 | `rw-evidence-map` |
+| 生成并筛选候选创新点 | `rw-research-novelty` |
+| 设计系统综述、范围综述和证据综合流程 | `rw-review-methods` |
+| 建立研究设计、样本、测量和分析计划 | `rw-research-design` |
+| 在执行或投稿前检查研究漏洞 | `rw-research-referee` |
+| 保存单个研究项目的状态和交接记录 | `rw-research-passport` |
+| 核验主张是否被指定来源支持 | `rw-claim-audit` |
+| 对批准的 Markdown 块执行局部修改 | `rw-revision-patch` |
+| 根据材料和来源组织论文或 PhD 章节 | `rw-phd-write` |
+| 提取并保持作者的学术语气 | `rw-phd-tone` |
+| 核验期刊并准备投稿和审稿回复 | `rw-journal-submission` |
+| 根据任务和环境选择科研工具 | `rw-research-lab-router` |
+
+完整的前后关系见 [Skill 关系图](docs/skill-link-map.md)。
+
+## 项目状态与接续
+
+对话中的上下文不等于研究项目档案。需要跨对话、跨 Agent 或跨阶段继续时，使用 `rw-research-passport` 保存 JSON 状态。
+
+状态文件记录：
+
+- 当前研究阶段和原问题。
+- 已有材料及其处理状态。
+- 已确认事实、当前判断和未知事项。
+- 已否定方向、停止条件和下一步。
+- Skill 交接和变更记录。
+
+主张核验使用 `rw-claim-audit` 保存来源位置、原文定位和 `PASS`、`REVIEW`、`BLOCK` 判断。局部改稿使用 `rw-revision-patch` 保存块 ID、hash、修改原因和未修改内容的保留比例。
+
+## 知识与验收
+
+公开包当前包含：
+
+- 356 条结构化知识原子。
+- 119 条运行公理。
+- 89 个案例和反例。
+- 89 个行为测试。
+- 16 个独立运行自检脚本。
+
+每个 Skill 自带适用方法、来源入口、停止条件、案例、反例、工作表和自检。需要当前文献、API、期刊政策或报告规范时，仍需核验官方来源。
+
+发布检查结果见 [v0.6.0 验收记录](docs/validation.md)。
 
 ## v0.6.0 更新
 
-- 新增 `rw-research-passport`：保存单个研究项目的材料、判断、未知项、阶段和交接状态。
-- 新增 `rw-claim-audit`：区分来源存在、引用格式和来源是否支持具体主张。
-- 新增 `rw-revision-patch`：按稳定 Markdown 块执行 hash 校验后的局部替换，并报告未修改内容的保留比例。
-- 更新 `rw-research-router` 和 Skill 关系图，使 3 个新流程进入科研路由。
+- 新增 `rw-research-passport`，保存研究项目的材料、判断、未知项、阶段和交接状态。
+- 新增 `rw-claim-audit`，区分来源存在、引用格式和来源是否支持具体主张。
+- 新增 `rw-revision-patch`，按稳定 Markdown 块和 hash 执行局部替换，并报告保留比例。
+- 更新 `rw-research-router`，加入“新手入门”和 3 个新流程的路由。
+- 公开包增加到 16 个科研 Skill。
 
-## License
+## 本地构建
 
-本项目使用 [Apache License 2.0](LICENSE)。
-
-## 使用方式
-
-不知道从哪里开始时，使用 `rw-research-router`。研究阶段明确时，可以直接调用对应 Skill。
-
-每个 Skill 自带适用的方法、规则、案例、反例、模板或工作表和自检脚本。它们不要求私人工作区、个人语料目录或预设 research-lab。
-
-## 本地同步
-
-发布目录中的 Skill 是工作区源码的生成副本。更新源码后运行：
+公开仓库中的 Skill 是发布副本。维护者从工作区源码同步后运行：
 
 ```bash
 python3 scripts/sync_from_workspace.py
 python3 scripts/build_release.py
 ```
 
-发布包输出到 `dist/rw-research-skill-版本号.zip`。
+发布包生成在：
 
-## 发布前检查
+```text
+dist/rw-research-skill-0.6.0.zip
+```
 
-- `VERSION`、`manifest.json` 和 `plugin.json` 版本一致。
-- `LICENSE` 使用 Apache-2.0。
-- 16 个 Skill 通过结构检查和独立运行自检。
-- 发布包没有私人工作区路径、真实业务材料、本地状态或报告。
+构建过程检查版本一致性、Skill 结构和 16 个独立运行自检。
 
-公共仓库：[rolandwonglonam/rw-research-skill](https://github.com/rolandwonglonam/rw-research-skill)。
+## License
+
+本项目采用 [Apache License 2.0](LICENSE)。
+
+公共仓库：[rolandwonglonam/rw-research-skill](https://github.com/rolandwonglonam/rw-research-skill)
