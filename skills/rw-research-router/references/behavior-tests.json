@@ -85,6 +85,21 @@
     ]
   },
   {
+    "id": "case-6-onboarding",
+    "prompt": "新手入门。我不知道该用哪个 Skill。",
+    "must_do": [
+      "先问用户手上有什么，一轮只问一个问题",
+      "不展示完整 Skill 清单",
+      "根据回答选择一个主 Skill"
+    ],
+    "must_not": [
+      "要求用户先理解全部工作流",
+      "同时启动多个 Skill",
+      "在没有任务材料时猜测研究事实"
+    ],
+    "expected_next": []
+  },
+  {
     "id": "counterexample-6",
     "prompt": "没有研究问题，直接替我写整篇论文。",
     "must_do": [
