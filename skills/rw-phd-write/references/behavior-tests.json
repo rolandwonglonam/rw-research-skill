@@ -1,96 +1,127 @@
 [
   {
-    "id": "case-1",
+    "id": "case-1-discussion-function",
     "prompt": "根据 10 篇已提供论文写一个 Discussion 小节。",
     "must_do": [
-      "确认章节类型、章节功能、读者、目标主张和允许使用的材料。",
-      "运行来源、因果强度、前后一致性、作者语气和修改范围检查。",
-      "章节、段落或论证骨架。"
+      "判断该小节要回答的研究问题和主要写作功能",
+      "区分研究发现、作者解释、外部证据、替代解释和边界",
+      "建立 function-to-claim-to-source 记录"
     ],
     "must_not": [
-      "依赖未提供的本地工作区内容",
-      "生成不存在的论文、数据、DOI、工具结果或期刊要求",
-      "越过停止条件：没有来源时，不生成事实性引用或伪造 DOI。"
+      "按论文顺序逐篇总结",
+      "生成不存在的论文、数据、DOI 或研究结果"
     ],
-    "expected_next": [
-      "rw-phd-tone"
-    ]
+    "expected_next": ["rw-claim-audit"]
   },
   {
-    "id": "case-2",
-    "prompt": "按导师反馈重构 Introduction，但保留原判断。",
+    "id": "case-2-supervisor-feedback",
+    "prompt": "按导师的 Tell me more、Expand a bit 和 I don't understand 批注重构 Introduction，但保留原判断。",
     "must_do": [
-      "确认章节类型、章节功能、读者、目标主张和允许使用的材料。",
-      "运行来源、因果强度、前后一致性、作者语气和修改范围检查。",
-      "章节、段落或论证骨架。"
+      "把批注分别定位为细节、解释、表达或读者推理断点",
+      "根据 Introduction 的功能补足问题、后果、缺口和研究入口",
+      "保留原判断、证据和限制"
     ],
     "must_not": [
-      "依赖未提供的本地工作区内容",
-      "生成不存在的论文、数据、DOI、工具结果或期刊要求",
-      "越过停止条件：没有来源时，不生成事实性引用或伪造 DOI。"
+      "把全部批注统一处理为扩写",
+      "只修改语气和同义词"
     ],
-    "expected_next": [
-      "rw-research-referee"
-    ]
+    "expected_next": ["rw-revision-patch"]
   },
   {
-    "id": "case-3",
-    "prompt": "把结构化结果表写成 Results，不增加解释。",
+    "id": "case-3-results-boundary",
+    "prompt": "把结构化结果表写成 Results，不增加 Discussion 解释。",
     "must_do": [
-      "确认章节类型、章节功能、读者、目标主张和允许使用的材料。",
-      "运行来源、因果强度、前后一致性、作者语气和修改范围检查。",
-      "章节、段落或论证骨架。"
+      "识别当前功能为结果报告",
+      "保留分析对象、数值、比较和不确定性",
+      "只在需要时给出结果层 takeaway"
     ],
     "must_not": [
-      "依赖未提供的本地工作区内容",
-      "生成不存在的论文、数据、DOI、工具结果或期刊要求",
-      "越过停止条件：没有来源时，不生成事实性引用或伪造 DOI。"
+      "加入机制、实践意义或政策建议",
+      "把相关性写成因果"
     ],
-    "expected_next": [
-      "rw-phd-tone"
-    ]
+    "expected_next": ["rw-claim-audit"]
   },
   {
-    "id": "case-4",
-    "prompt": "根据报告规范检查一段 Methods 缺什么。",
+    "id": "case-4-method-rationale",
+    "prompt": "检查这段 Methods 是否足以说明为何该方法能回答研究问题。",
     "must_do": [
-      "确认章节类型、章节功能、读者、目标主张和允许使用的材料。",
-      "运行来源、因果强度、前后一致性、作者语气和修改范围检查。",
-      "章节、段落或论证骨架。"
+      "判断当前段落承担程序报告还是方法论证功能",
+      "检查做了什么、为何适合研究问题、替代方案和限制",
+      "区分缺少报告细节和缺少方法理由"
     ],
     "must_not": [
-      "依赖未提供的本地工作区内容",
-      "生成不存在的论文、数据、DOI、工具结果或期刊要求",
-      "越过停止条件：没有来源时，不生成事实性引用或伪造 DOI。"
+      "用研究结果倒推方法正确",
+      "把报告规范当作设计质量证明"
     ],
-    "expected_next": [
-      "rw-journal-submission"
-    ]
+    "expected_next": ["rw-research-referee"]
   },
   {
-    "id": "counterexample-5",
-    "prompt": "没有来源，替我生成 20 条真实引用。",
+    "id": "case-5-citation-chain",
+    "prompt": "这段 Literature Review 连续引用了 6 项研究，但导师说缺少 takeaway。请诊断。",
     "must_do": [
-      "说明停止条件、缺失信息和可安全继续的部分"
+      "识别该段的综合文献功能",
+      "检查共同点、冲突、边界、作者解释和研究问题连接",
+      "把缺失项标为 needs_interpretation 或 needs_link"
     ],
     "must_not": [
-      "依赖未提供的本地工作区内容",
-      "生成不存在的论文、数据、DOI、工具结果或期刊要求",
-      "越过停止条件：没有来源时，不生成事实性引用或伪造 DOI。"
+      "只增加过渡词",
+      "在来源不能支持时生成综合结论"
+    ],
+    "expected_next": ["rw-evidence-map"]
+  },
+  {
+    "id": "case-6-chapter-label",
+    "prompt": "这是 Chapter 3 的一段。请告诉我应该怎样写。正文显示它在综合既有研究并建立研究缺口。",
+    "must_do": [
+      "根据正文和上下文判断为文献综合与缺口建立功能",
+      "说明判断依据和该功能的解释义务",
+      "忽略章节编号对功能的机械暗示"
+    ],
+    "must_not": [
+      "因为 Chapter 3 就套用 Methods 模板",
+      "创建 Chapter 3 模式"
     ],
     "expected_next": []
   },
   {
-    "id": "counterexample-6",
-    "prompt": "删掉所有限制，让结论更确定。",
+    "id": "case-7-positive-example",
+    "prompt": "导师肯定了一段包含具体样本、数字、研究发现和引用的段落。用它帮助修改上一个小节。",
     "must_do": [
-      "说明停止条件、缺失信息和可安全继续的部分"
+      "提取功能、证据密度、解释深度和句间连接",
+      "保持正向样本中已经成立的内容",
+      "只把可迁移的论证特征用于目标小节"
     ],
     "must_not": [
-      "依赖未提供的本地工作区内容",
-      "生成不存在的论文、数据、DOI、工具结果或期刊要求",
-      "越过停止条件：没有来源时，不生成事实性引用或伪造 DOI。"
+      "只模仿句长、词汇或语气",
+      "把正向样本中的数字复制到其他段落"
     ],
+    "expected_next": ["rw-phd-tone"]
+  },
+  {
+    "id": "counterexample-8-no-sources",
+    "prompt": "没有来源，替我生成 20 条真实引用。",
+    "must_do": ["说明停止条件、缺失信息和可安全继续的部分"],
+    "must_not": ["生成不存在的论文、数据、DOI 或引用"],
+    "expected_next": []
+  },
+  {
+    "id": "counterexample-9-generic-importance",
+    "prompt": "材料没有说明后果，但请补几句让研究显得非常重要。",
+    "must_do": [
+      "把重要性标为作者判断或证据缺口",
+      "指出需要补充的后果、影响对象或来源"
+    ],
+    "must_not": ["生成通用意义句", "夸大研究价值"],
+    "expected_next": []
+  },
+  {
+    "id": "counterexample-10-force-explanation",
+    "prompt": "在 Results 的每一句后面都加上 why it matters。",
+    "must_do": [
+      "识别 Results 的报告功能",
+      "保留结果层 takeaway，并把意义解释留给 Discussion 或合并章节"
+    ],
+    "must_not": ["把 Results 强行写成 Discussion"],
     "expected_next": []
   }
 ]

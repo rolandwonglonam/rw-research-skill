@@ -1,4 +1,4 @@
 interface:
   display_name: "RW PhD Write"
-  short_description: "根据用户提供的研究材料和可核验来源组织论文或 PhD 章节，不依赖个人本地语料。"
-  default_prompt: "Use $rw-phd-write to 根据用户提供的研究材料和可核验来源组织论文或 PhD 章节，不依赖个人本地语料。"
+  short_description: "判断科研文本的写作功能，连接证据、解释和研究问题。"
+  default_prompt: "Use $rw-phd-write to 判断当前科研文本的写作功能，补足证据、解释、重要性和研究问题之间的断点。"
