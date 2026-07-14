@@ -1,16 +1,16 @@
 ---
 name: rw-phd-write
 description: |
-  根据用户提供的研究材料和可核验来源组织论文或 PhD 章节，不依赖个人本地语料。 Use when the user asks for “写 PhD 章节”、“修改论文论证”、“根据来源写学术段落”, or requests the rw-phd-write workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
+  根据用户提供的研究材料和可核验来源组织科研文本，判断章节、小节和段落的写作功能，补足证据、解释、重要性和研究问题之间的断点。 Use when the user asks for “写 PhD 章节”、“修改论文论证”、“根据来源写学术段落”、“按导师反馈修改科研写作”, or requests the rw-phd-write workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---
 
 # RW PhD Write
 
-根据用户提供的研究材料和可核验来源组织论文或 PhD 章节，不依赖个人本地语料。
+根据用户提供的研究材料和可核验来源组织科研文本。先判断当前部分承担什么写作功能，再决定需要哪些证据、解释和连接。
 
 ## 启动
 
-1. 读取 `references/standalone.md`、`references/method.md` 和 `references/standards.md`。
+1. 读取 `references/standalone.md`、`references/method.md`、`references/writing-functions.md` 和 `references/standards.md`。
 2. 读取用户本轮提供的材料；没有材料时，只完成当前证据允许的部分。
 3. 需要规则判断时检索 `references/atoms.jsonl`；遇到相似任务时读取 `references/cases.md`。
 4. 需要选择方法或工具时读取 `references/domain-guide.md`，并使用 `assets/worksheet.md` 组织交付。
@@ -19,16 +19,25 @@ description: |
 
 ## 工作阶段
 
-1. 确认章节类型、章节功能、读者、目标主张和允许使用的材料。
-2. 建立 claim-to-source 表，区分事实、作者解释、当前推断和未知事项。
-3. 按章节功能组织论证移动、段落顺序和限制位置。
-4. 先写论点和证据骨架，再写正文，不生成未核验引用。
-5. 按研究类型检查相应报告规范、方法透明度和披露事项。
-6. 运行来源、因果强度、前后一致性、作者语气和修改范围检查。
+1. 先建立 research output profile，记录机构、文稿类型、读者、研究问题、语言区域、引用格式、导师或审稿反馈、正向样本、输出格式和公开边界。
+2. 依据内容和上下文判断文稿、章节、小节和段落的写作功能，不从章节编号推断功能。
+3. 为当前功能确定解释义务：读者需要知道什么、哪些连接必须明说、哪些解释不应出现在这里。
+4. 建立 function-to-claim-to-source 表，区分写作功能、目标主张、证据、作者解释、重要性、研究问题连接、限制和未知事项。
+5. 按写作功能组织论证移动和段落顺序；先写论点和证据骨架，再写正文，不生成未核验引用。
+6. 运行读者推断检查：如果关键结论只能靠读者补出，补写有证据支持的连接；证据不足时标记缺口。
+7. 按研究类型检查相应报告规范、方法透明度和披露事项。
+8. 运行来源、具体性、因果强度、功能完成度、前后一致性、作者语气和修改范围检查，再把成稿交给引用核验和交付质检。
 
 ## 运行规则
 
 - 写作从章节功能和主张开始，不从漂亮句子开始。
+- 章节编号不是写作功能。同一编号在不同论文中可以承担不同任务。
+- 每个章节、小节和段落都要完成当前写作功能，但不套用同一段落模板。
+- 解释义务由写作功能决定。建立问题、综合文献、提出缺口和解释结果时，通常需要说明证据说明什么、为什么重要、怎样连接研究问题；Results 以准确报告发现为主，不提前写成 Discussion。
+- 连续列出研究结果不能代替综合判断。需要作者判断时，明确写出当前证据允许的解释和边界。
+- 如果关键逻辑只能由作者脑中补全而读者无法从文字获得，补写连接；不能用空泛的“这很重要”代替具体后果。
+- 保留样本、测量、比较、数字、效应、不确定性和原文定位等具体信息，不为增加细节而补造材料。
+- 导师或审稿人的正向评价用于校准证据密度、解释深度和句间连接，不只用于模仿语气。
 - 每个事实性主张都要有用户材料或可核验来源。
 - 来源支持范围小于句子范围时，收窄句子。
 - 结果、解释、推断和建议要使用不同的证据强度。
@@ -39,20 +48,28 @@ description: |
 - 报告规范是最低透明度检查，不是段落模板。
 - 用户修改要求优先保留原判断、证据和限制。
 - 没有作者语料时使用克制的学术注册，不冒充个人指纹。
+- 用户已指定可用的持久语气 profile 或本地 tone skill 时，先使用该 profile；没有时再由 rw-phd-tone 从本轮样本建立临时规则。
+- 公开正文不得包含搜索日志、claim audit 路径、draft-status note 或其他内部交接说明。
 - 引用、作者贡献、利益冲突和 AI 使用按目标期刊当前规则核验。
 
 ## 输出
 
 - 章节、段落或论证骨架。
-- claim-to-source 表和引用缺口。
-- 修改说明、未解决问题和合规检查。
+- research output profile、function-to-claim-to-source 表和引用缺口。
+- 写作功能判断、解释义务、读者推断断点和未完成项。
+- 修改说明、未解决问题和下游核验状态；按任务规模只展开必要部分。
 
 ## 停止条件
 
 - 没有来源时，不生成事实性引用或伪造 DOI。
 - 没有研究结果时，不写成研究已完成。
+- 没有证据支持重要性或研究问题连接时，标记为作者判断或证据缺口，不生成通用意义句。
 - 不为流畅删除限制、反例和不确定性。
 - 不把 Skill 输出当成作者最终责任或期刊合规确认。
+
+## 随 Skill 提供的资源
+
+- `assets/research-output-profile.yaml`：在写作开始前记录机构、读者、语言、引用、缩写和公开边界。
 
 ## 独立运行
 
