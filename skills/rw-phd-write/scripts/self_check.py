@@ -14,6 +14,7 @@ def main() -> int:
     required = [
         "SKILL.md", "agents/openai.yaml", "assets/worksheet.md",
         "references/standalone.md", "references/source-map.md", "references/standards.md",
+        "references/writing-functions.md",
         "references/method.md", "references/domain-guide.md", "references/atoms.jsonl",
         "references/axioms.md", "references/cases.md", "references/behavior-tests.json",
         "references/acceptance.md", "references/source-evidence.md", "references/maturity.json",
@@ -25,12 +26,23 @@ def main() -> int:
     atoms = [json.loads(line) for line in (refs / "atoms.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
     tests = json.loads((refs / "behavior-tests.json").read_text(encoding="utf-8"))
     maturity = json.loads((refs / "maturity.json").read_text(encoding="utf-8"))
-    if len(atoms) < 24:
-        failures.append("fewer than 24 atoms")
-    if (refs / "axioms.md").read_text(encoding="utf-8").count("## AXIOM-") < 8:
-        failures.append("fewer than 8 axioms")
-    if len(tests) < 6 or sum(test["id"].startswith("counterexample") for test in tests) < 2:
+    axiom_count = (refs / "axioms.md").read_text(encoding="utf-8").count("## AXIOM-")
+    if len(atoms) < 40:
+        failures.append("fewer than 40 atoms")
+    if axiom_count < 13:
+        failures.append("fewer than 13 axioms")
+    if len(tests) < 10 or sum(test["id"].startswith("counterexample") for test in tests) < 3:
         failures.append("behavior test coverage below target")
+    if maturity.get("atom_count") != len(atoms):
+        failures.append("maturity atom_count is stale")
+    if maturity.get("axiom_count") != axiom_count:
+        failures.append("maturity axiom_count is stale")
+    if maturity.get("behavior_test_count") != len(tests):
+        failures.append("maturity behavior_test_count is stale")
+    test_ids = {test.get("id") for test in tests}
+    required_test_ids = {"case-5-citation-chain", "case-6-chapter-label", "counterexample-10-force-explanation"}
+    if not required_test_ids.issubset(test_ids):
+        failures.append("writing-function behavior tests missing")
     if not maturity.get("standalone") or maturity.get("local_hard_dependencies"):
         failures.append("standalone maturity contract failed")
     forbidden = (
