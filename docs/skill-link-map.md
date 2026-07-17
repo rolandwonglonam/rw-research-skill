@@ -10,6 +10,8 @@ flowchart LR
   novelty["rw-research-novelty"]
   review["rw-review-methods"]
   design["rw-research-design"]
+  data["rw-research-data"]
+  stats["rw-statistics-audit"]
   referee["rw-research-referee"]
   passport["rw-research-passport"]
   audit["rw-claim-audit"]
@@ -22,6 +24,8 @@ flowchart LR
   router --> question
   router --> discovery
   router --> novelty
+  router --> data
+  router --> stats
   router --> passport
   router --> audit
   router --> patch
@@ -34,6 +38,8 @@ flowchart LR
   extractor --> audit
   extractor --> passport
   extractor --> review
+  extractor --> data
+  extractor --> stats
   evidence --> novelty
   evidence --> write
   novelty --> discovery
@@ -42,7 +48,14 @@ flowchart LR
   review --> evidence
   review --> referee
   design --> referee
+  design --> stats
   design --> write
+  data --> passport
+  data --> submission
+  data --> referee
+  stats --> referee
+  stats --> audit
+  stats --> write
   referee --> design
   referee --> write
   write --> tone
@@ -61,6 +74,8 @@ flowchart LR
   passport --> write
   submission --> patch
   submission --> audit
+  submission --> data
+  submission --> stats
   submission --> referee
   tools --> discovery
   tools --> review

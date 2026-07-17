@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 
@@ -25,11 +26,11 @@ def main() -> int:
     atoms = [json.loads(line) for line in (refs / "atoms.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
     tests = json.loads((refs / "behavior-tests.json").read_text(encoding="utf-8"))
     maturity = json.loads((refs / "maturity.json").read_text(encoding="utf-8"))
-    if len(atoms) < 24:
-        failures.append("fewer than 24 atoms")
-    if (refs / "axioms.md").read_text(encoding="utf-8").count("## AXIOM-") < 8:
-        failures.append("fewer than 8 axioms")
-    if len(tests) < 6 or sum(test["id"].startswith("counterexample") for test in tests) < 2:
+    if len(atoms) < 28:
+        failures.append("fewer than 28 atoms")
+    if (refs / "axioms.md").read_text(encoding="utf-8").count("## AXIOM-") < 9:
+        failures.append("fewer than 9 axioms")
+    if len(tests) < 8 or sum(test["id"].startswith("counterexample") for test in tests) < 3:
         failures.append("behavior test coverage below target")
     if not maturity.get("standalone") or maturity.get("local_hard_dependencies"):
         failures.append("standalone maturity contract failed")
@@ -49,6 +50,14 @@ def main() -> int:
         for marker in forbidden:
             if marker in text:
                 failures.append(f"hard local dependency in {path.relative_to(root)}: {marker}")
+        privacy_patterns = {
+            "email address": r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b",
+            "Windows user path": r"[A-Za-z]:\\Users\\[^\\\s]+",
+            "secret assignment": r"\b(?:api[_-]?key|password|access[_-]?token|secret)\s*[:=]\s*['\"][^'\"]+",
+        }
+        for label, pattern in privacy_patterns.items():
+            if re.search(pattern, text, flags=re.I):
+                failures.append(f"possible private data in {path.relative_to(root)}: {label}")
     print(json.dumps({"skill": root.name, "standalone": not failures, "failures": failures}, ensure_ascii=False, indent=2))
     return 1 if failures else 0
 

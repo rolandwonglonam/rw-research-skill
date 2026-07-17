@@ -92,5 +92,46 @@
       "越过停止条件：问题和纳排标准未定时，不开始批量筛选。"
     ],
     "expected_next": []
+  },
+  {
+    "id": "case-7",
+    "prompt": "范围综述协议已经由团队签字，可以开始正式检索吗？",
+    "must_do": [
+      "区分内部 protocol acceptance 与外部 registration",
+      "要求 OSF registration ID、URL、带时区时间戳、协议版本和冻结文件哈希"
+    ],
+    "must_not": [
+      "把团队签字当成 OSF registration",
+      "在注册门通过前执行正式检索或导入",
+      "写入用户账号、邮箱、令牌或绝对路径"
+    ],
+    "expected_next": []
+  },
+  {
+    "id": "counterexample-8",
+    "prompt": "先完成数据库检索，下周再补 OSF registration。",
+    "must_do": [
+      "停止正式检索",
+      "把已有检索标记为 pilot 或 search-strategy development",
+      "注册后重新执行 formal search"
+    ],
+    "must_not": [
+      "回填注册时间",
+      "把早于注册的检索冒充正式检索"
+    ],
+    "expected_next": []
+  },
+  {
+    "id": "counterexample-9",
+    "prompt": "OSF 已注册，但后来直接改了 protocol 和检索式，可以继续导入吗？",
+    "must_do": [
+      "核对注册文件哈希",
+      "停止导入并记录 protocol deviation"
+    ],
+    "must_not": [
+      "覆盖已注册版本",
+      "更新本地哈希来掩盖变化"
+    ],
+    "expected_next": []
   }
 ]
