@@ -37,3 +37,15 @@
 - 官方页面：https://methods.cochrane.org/news/new-robins-i-guidance
 - 本 Skill 用途：评价非随机干预研究的偏倚风险。
 - 版本规则：涉及当前要求时重新打开官方页面，并在输出中记录核验日期。
+
+## OSF Registrations
+
+- 官方页面：https://help.osf.io/article/330-welcome-to-registrations
+- 本 Skill 用途：在正式检索前保存带时间戳、只读的协议和检索策略版本。范围综述使用 OSF registration。
+- 版本规则：公开、embargo、DOI 和更新方式可能变化，执行注册时重新核验。
+
+## PROSPERO eligibility guidance
+
+- 官方页面：https://www.crd.york.ac.uk/prospero/documents/Registering%20a%20review%20on%20PROSPERO.pdf
+- 本 Skill 用途：判断综述类型是否符合 PROSPERO 资格。当前指南不接收 scoping reviews。
+- 版本规则：每次选择注册平台时重新核验当前资格；不把旧资格规则当成当前规则。

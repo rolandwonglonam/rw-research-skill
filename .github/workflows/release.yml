@@ -28,5 +28,4 @@ jobs:
           version="$(tr -d '[:space:]' < VERSION)"
           gh release create "${GITHUB_REF_NAME}" \
             --title "${GITHUB_REF_NAME}" \
-            --generate-notes \
-            "dist/rw-research-skill-${version}.zip"
+            --generate-notes
