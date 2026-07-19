@@ -1,0 +1,22 @@
+[
+  {
+    "id": "openai-gpt-5.6-sol",
+    "provider": "codex",
+    "model": "gpt-5.6-sol"
+  },
+  {
+    "id": "openai-gpt-5.6-terra",
+    "provider": "codex",
+    "model": "gpt-5.6-terra"
+  },
+  {
+    "id": "anthropic-claude-sonnet",
+    "provider": "claude",
+    "model": "sonnet"
+  },
+  {
+    "id": "anthropic-claude-opus",
+    "provider": "claude",
+    "model": "opus"
+  }
+]

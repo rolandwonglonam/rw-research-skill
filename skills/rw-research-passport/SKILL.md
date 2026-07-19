@@ -30,6 +30,7 @@ description: |
 ```bash
 python3 scripts/passport.py init project-passport.json --project-id PROJECT-ID --title "Project title"
 python3 scripts/passport.py add-material project-passport.json --id MAT-001 --type paper --title "Paper title" --source-pointer "doi:..." --status verified
+python3 scripts/passport.py add-material project-passport.json --id MAT-002 --type paper --title "Updated paper" --source-pointer "path-or-id" --content-sha256 SHA256 --supersedes-id MAT-001
 python3 scripts/passport.py validate project-passport.json
 python3 scripts/passport.py summary project-passport.json
 ```
@@ -44,7 +45,7 @@ python3 scripts/passport.py summary project-passport.json
 - 判断必须连接材料 ID，或明确写成当前推断。
 - 未知项不能因为流程推进而自动关闭。
 - 交接只传当前阶段需要的材料，避免把整个工作区当作上下文。
-- 原始材料变化后，旧判断标为待复核，不静默沿用。
+- 原始材料 hash 变化后，旧材料和依赖判断不能继续作为已确认输入；按 `references/method.md` 的版本变化流程处理。
 - 不把 Passport 当作跨项目个人记忆。
 
 ## 输出

@@ -36,6 +36,32 @@ class ResearchPassportCliTests(unittest.TestCase):
             self.assertEqual(2, invalid.returncode)
             self.assertIn("references missing material", invalid.stdout)
 
+    def test_material_hash_and_supersedes_link(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            passport = Path(temp_dir) / "passport.json"
+            self.assertEqual(0, self.run_cli("init", str(passport), "--project-id", "PROJECT-2", "--title", "Version test").returncode)
+            first = self.run_cli(
+                "add-material", str(passport), "--id", "MAT-1", "--type", "paper",
+                "--title", "Version one", "--source-pointer", "source:v1", "--status", "superseded",
+                "--content-sha256", "a" * 64,
+            )
+            self.assertEqual(0, first.returncode, first.stdout + first.stderr)
+            second = self.run_cli(
+                "add-material", str(passport), "--id", "MAT-2", "--type", "paper",
+                "--title", "Version two", "--source-pointer", "source:v2", "--status", "raw",
+                "--content-sha256", "b" * 64, "--supersedes-id", "MAT-1",
+            )
+            self.assertEqual(0, second.returncode, second.stdout + second.stderr)
+            payload = json.loads(passport.read_text(encoding="utf-8"))
+            self.assertEqual("MAT-1", payload["materials"][1]["supersedes_id"])
+
+            invalid = self.run_cli(
+                "add-material", str(passport), "--id", "MAT-3", "--type", "paper",
+                "--title", "Bad hash", "--source-pointer", "source:v3", "--content-sha256", "not-a-hash",
+            )
+            self.assertEqual(2, invalid.returncode)
+            self.assertIn("64-character hexadecimal", invalid.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

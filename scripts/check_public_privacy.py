@@ -62,6 +62,7 @@ def main() -> int:
 
     public_paths = [path for path in SKILLS.rglob("*") if path.is_file()]
     public_paths.extend(path for path in (ROOT / "docs").rglob("*") if path.is_file())
+    public_paths.extend(path for path in (ROOT / "evals").rglob("*") if path.is_file())
     public_paths.extend(
         [ROOT / "README.md", ROOT / "SKILL.md", ROOT / "manifest.json", ROOT / ".codex-plugin" / "plugin.json"]
     )
