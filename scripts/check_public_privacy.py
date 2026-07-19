@@ -64,7 +64,13 @@ def main() -> int:
     public_paths.extend(path for path in (ROOT / "docs").rglob("*") if path.is_file())
     public_paths.extend(path for path in (ROOT / "evals").rglob("*") if path.is_file())
     public_paths.extend(
-        [ROOT / "README.md", ROOT / "SKILL.md", ROOT / "manifest.json", ROOT / ".codex-plugin" / "plugin.json"]
+        [
+            ROOT / "README.md",
+            ROOT / "CONTRIBUTING.md",
+            ROOT / "SKILL.md",
+            ROOT / "manifest.json",
+            ROOT / ".codex-plugin" / "plugin.json",
+        ]
     )
     for path in sorted(set(public_paths)):
         if not path.is_file() or path.suffix in {".pyc", ".png", ".jpg", ".jpeg", ".gif", ".pdf"}:
