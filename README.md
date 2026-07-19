@@ -1,14 +1,32 @@
-# RW Research Skill
+<p align="center">
+  <a href="LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-2ea44f.svg"></a>
+  <a href="VERSION"><img alt="Version: v0.7.1" src="https://img.shields.io/badge/version-v0.7.1-blue.svg"></a>
+  <a href="#直接调用的-skill"><img alt="19 research Skills" src="https://img.shields.io/badge/research%20Skills-19-6f42c1.svg"></a>
+  <a href="#安装"><img alt="Works with Agent Skills" src="https://img.shields.io/badge/works%20with-Agent%20Skills-0969da.svg"></a>
+  <a href="evals/cross-model/results/2026-07-20-cross-model-v2/summary.md"><img alt="Cross-model record: 4 models" src="https://img.shields.io/badge/cross--model%20record-4%20models-2ea44f.svg"></a>
+  <a href="CONTRIBUTING.md"><img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
+</p>
 
-把研究问题、文献、证据、研究设计、论文草稿和投稿材料，变成当前可以核验和继续推进的一步。
+<h1 align="center">🔬 RW Research Skill</h1>
 
-RW Research Skill 由 Roland Wayne 创建。当前包含 19 个科研 Skill、469 条知识原子、149 条公理、115 个案例和反例，以及 116 条行为合同。
+<p align="center"><strong>把研究任务拆成可以核验、可以交接、可以继续推进的一步。</strong></p>
+
+<p align="center">研究问题 → 文献 → 证据 → 设计 → 写作 → 核验 → 投稿</p>
+
+<p align="center">
+  <a href="#新手从这里开始">快速开始</a> ·
+  <a href="#安装">安装</a> ·
+  <a href="#常见场景与当前入口">常见场景</a> ·
+  <a href="#直接调用的-skill">全部 Skill</a> ·
+  <a href="#知识与验收">验证记录</a> ·
+  <a href="CONTRIBUTING.md">贡献</a>
+</p>
+
+---
+
+RW Research Skill 由 Roland Wayne 创建。当前版本：`v0.7.1`。当前包含 19 个科研 Skill、469 条知识原子、149 条公理、115 个案例和反例，以及 116 条行为合同。
 
 适用于手上有研究想法、论文、数据、研究方案、章节草稿或审稿意见，需要判断下一步的人。你可以直接提交材料，也可以只说现在卡在哪里。系统会选择一个主 Skill，每次处理当前一步。
-
-当前版本：`v0.7.1`
-
-[新手从这里开始](#新手从这里开始) · [安装](#安装) · [常见场景](#常见场景与当前入口) · [全部 Skill](#直接调用的-skill) · [项目状态](#项目状态与接续) · [本地构建](#本地构建)
 
 ## 你可以用它做什么
 
@@ -240,6 +258,8 @@ $rw-research-lab-router 根据任务、数据和当前环境选择工具。
 - 19 个独立运行静态自检脚本。
 
 行为合同保存提示词、应做事项、不应做事项和下一步，用于后续模型评测。静态自检只检查文件、结构、数量和独立运行约束，不代表模型已经执行全部行为合同，也不证明真实任务提效。
+
+2026-07-20 的跨模型配对验证使用 2 家提供方的 4 个模型入口和 8 个合成任务。带 Skill 条件通过 32／32，不带 Skill 条件通过 19／32，差值为 +40.625 个百分点。这个结果只适用于已记录的任务、模型和版本，不代表真实科研结果已经改善。评测协议和完整记录见 [`evals/cross-model/`](evals/cross-model/) 和 [结果摘要](evals/cross-model/results/2026-07-20-cross-model-v2/summary.md)。
 
 公开内容不包含个人论文、数据、评审记录、研究项目状态或个人来源标签。案例和行为合同使用合成或占位输入。规则见 [`docs/public-content-policy.md`](docs/public-content-policy.md)。
 

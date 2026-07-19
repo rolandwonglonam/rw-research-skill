@@ -73,7 +73,19 @@ def main() -> int:
     if privacy_check.returncode:
         failures.extend(f"privacy: {item}" for item in privacy.get("failures", []))
 
-    result = {"version": version, "metrics": metrics, "privacy": privacy, "failures": failures}
+    cross_model_check = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "cross_model_eval.py"), "check"],
+        capture_output=True,
+        text=True,
+    )
+    try:
+        cross_model = json.loads(cross_model_check.stdout)
+    except json.JSONDecodeError:
+        cross_model = {"failures": ["cross-model check did not return JSON"]}
+    if cross_model_check.returncode:
+        failures.extend(f"cross-model: {item}" for item in cross_model.get("failures", []))
+
+    result = {"version": version, "metrics": metrics, "privacy": privacy, "cross_model": cross_model, "failures": failures}
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 1 if failures else 0
 

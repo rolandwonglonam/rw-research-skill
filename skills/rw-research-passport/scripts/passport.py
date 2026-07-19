@@ -76,6 +76,7 @@ def validate(data: dict[str, Any]) -> list[str]:
         return errors
 
     material_ids: set[str] = set()
+    supersedes_links: list[tuple[str, str, str]] = []
     for index, item in enumerate(data["materials"]):
         prefix = f"materials[{index}]"
         if not isinstance(item, dict):
@@ -88,8 +89,26 @@ def validate(data: dict[str, Any]) -> list[str]:
             errors.append(f"{prefix}.status is invalid")
         if isinstance(item.get("id"), str):
             material_ids.add(item["id"])
+        content_sha256 = item.get("content_sha256")
+        if content_sha256 is not None and (
+            not isinstance(content_sha256, str)
+            or len(content_sha256) != 64
+            or any(character not in "0123456789abcdefABCDEF" for character in content_sha256)
+        ):
+            errors.append(f"{prefix}.content_sha256 must be a 64-character hexadecimal string")
+        supersedes_id = item.get("supersedes_id")
+        if supersedes_id is not None:
+            if not isinstance(supersedes_id, str) or not supersedes_id.strip():
+                errors.append(f"{prefix}.supersedes_id must be a non-empty string")
+            elif isinstance(item.get("id"), str):
+                supersedes_links.append((prefix, item["id"], supersedes_id))
     for duplicate in sorted(duplicate_ids(data["materials"])):
         errors.append(f"duplicate material id: {duplicate}")
+    for prefix, item_id, supersedes_id in supersedes_links:
+        if supersedes_id == item_id:
+            errors.append(f"{prefix}.supersedes_id cannot reference itself")
+        elif supersedes_id not in material_ids:
+            errors.append(f"{prefix}.supersedes_id references missing material: {supersedes_id}")
 
     for collection, required_fields, statuses in [
         ("decisions", ["id", "statement", "status", "evidence_ids", "recorded_at"], DECISION_STATUSES),
@@ -154,14 +173,19 @@ def command_add_material(args: argparse.Namespace) -> int:
         print(f"duplicate material id: {args.id}")
         return 2
     timestamp = now()
-    data.setdefault("materials", []).append({
+    material = {
         "id": args.id,
         "type": args.type,
         "title": args.title,
         "source_pointer": args.source_pointer,
         "status": args.status,
         "added_at": timestamp,
-    })
+    }
+    if args.content_sha256:
+        material["content_sha256"] = args.content_sha256
+    if args.supersedes_id:
+        material["supersedes_id"] = args.supersedes_id
+    data.setdefault("materials", []).append(material)
     data["updated_at"] = timestamp
     data.setdefault("audit_log", []).append({"at": timestamp, "action": "material_added", "target_id": args.id, "reason": args.reason})
     errors = validate(data)
@@ -222,6 +246,8 @@ def build_parser() -> argparse.ArgumentParser:
     add_parser.add_argument("--title", required=True)
     add_parser.add_argument("--source-pointer", required=True)
     add_parser.add_argument("--status", choices=sorted(MATERIAL_STATUSES), default="raw")
+    add_parser.add_argument("--content-sha256")
+    add_parser.add_argument("--supersedes-id")
     add_parser.add_argument("--reason", default="material registered")
     add_parser.set_defaults(func=command_add_material)
 
