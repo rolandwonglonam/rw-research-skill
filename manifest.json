@@ -1,6 +1,6 @@
 {
   "name": "rw-research-skill",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "license": "Apache-2.0",
   "channel": "preview",
   "skills": [
@@ -16,6 +16,7 @@
     "rw-statistics-audit",
     "rw-research-referee",
     "rw-research-passport",
+    "rw-citation-audit",
     "rw-claim-audit",
     "rw-revision-patch",
     "rw-phd-write",

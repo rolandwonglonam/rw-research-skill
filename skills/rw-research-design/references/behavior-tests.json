@@ -14,11 +14,12 @@
     ],
     "expected_next": [
       "rw-research-referee"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-2",
-    "prompt": "观察性死亡数据能支持什么因果主张？",
+    "prompt": "观察性结局数据能支持什么因果主张？",
     "must_do": [
       "写出主要问题、目标估计量或需要解释的现象。",
       "输出首选设计、替代设计、资源限制、伦理事项和报告规范。",
@@ -31,7 +32,8 @@
     ],
     "expected_next": [
       "rw-research-referee"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-3",
@@ -48,7 +50,8 @@
     ],
     "expected_next": [
       "rw-research-referee"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-4",
@@ -65,7 +68,8 @@
     ],
     "expected_next": [
       "rw-research-referee"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "counterexample-5",
@@ -78,7 +82,8 @@
       "生成不存在的论文、数据、DOI、工具结果或期刊要求",
       "越过停止条件：现有数据不能回答问题时，明确标记不可回答。"
     ],
-    "expected_next": []
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "counterexample-6",
@@ -91,6 +96,7 @@
       "生成不存在的论文、数据、DOI、工具结果或期刊要求",
       "越过停止条件：现有数据不能回答问题时，明确标记不可回答。"
     ],
-    "expected_next": []
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   }
 ]

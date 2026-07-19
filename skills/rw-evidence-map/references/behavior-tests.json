@@ -1,7 +1,7 @@
 [
   {
     "id": "case-1",
-    "prompt": "比较 3 种盐摄入测量方法的证据。",
+    "prompt": "比较 3 种测量方法的证据。",
     "must_do": [
       "定义证据图服务的研究问题、决策和时间范围。",
       "输出证据簇、冲突原因、空白和下一步取证。",
@@ -14,7 +14,8 @@
     ],
     "expected_next": [
       "rw-research-design"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-2",
@@ -31,7 +32,8 @@
     ],
     "expected_next": [
       "rw-research-referee"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-3",
@@ -48,7 +50,8 @@
     ],
     "expected_next": [
       "rw-phd-write"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-4",
@@ -65,7 +68,8 @@
     ],
     "expected_next": [
       "rw-phd-write"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "counterexample-5",
@@ -78,7 +82,8 @@
       "生成不存在的论文、数据、DOI、工具结果或期刊要求",
       "越过停止条件：摘要不足以判断方法或结果时，标记待全文核对。"
     ],
-    "expected_next": []
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "counterexample-6",
@@ -91,6 +96,7 @@
       "生成不存在的论文、数据、DOI、工具结果或期刊要求",
       "越过停止条件：摘要不足以判断方法或结果时，标记待全文核对。"
     ],
-    "expected_next": []
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   }
 ]

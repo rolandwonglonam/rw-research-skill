@@ -1,5 +1,32 @@
 [
-  {"id":"normal-two-blocks","prompt":"只修改 5 个块中的 2 个。","expect":["原文件不变","2 个块被替换","报告 preserved ratio"]},
-  {"id":"stop-stale-hash","prompt":"文稿在生成 Patch 后被改动。","expect":["hash 不匹配","整批停止","不生成部分结果"]},
-  {"id":"stop-structural","prompt":"要求删除两节并重排标题。","expect":["识别结构修改","不使用第一版 Patch","请求单独确认"]}
+  {
+    "id": "normal-two-blocks",
+    "prompt": "只修改 5 个块中的 2 个。",
+    "expect": [
+      "原文件不变",
+      "2 个块被替换",
+      "报告 preserved ratio"
+    ],
+    "fixture_kind": "synthetic"
+  },
+  {
+    "id": "stop-stale-hash",
+    "prompt": "文稿在生成 Patch 后被改动。",
+    "expect": [
+      "hash 不匹配",
+      "整批停止",
+      "不生成部分结果"
+    ],
+    "fixture_kind": "synthetic"
+  },
+  {
+    "id": "stop-structural",
+    "prompt": "要求删除两节并重排标题。",
+    "expect": [
+      "识别结构修改",
+      "不使用第一版 Patch",
+      "请求单独确认"
+    ],
+    "fixture_kind": "synthetic"
+  }
 ]

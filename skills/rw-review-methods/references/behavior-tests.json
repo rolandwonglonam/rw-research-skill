@@ -14,7 +14,8 @@
     ],
     "expected_next": [
       "rw-literature-discovery"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-2",
@@ -31,7 +32,8 @@
     ],
     "expected_next": [
       "rw-research-referee"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-3",
@@ -48,7 +50,8 @@
     ],
     "expected_next": [
       "rw-evidence-map"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-4",
@@ -65,7 +68,8 @@
     ],
     "expected_next": [
       "rw-research-referee"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "counterexample-5",
@@ -78,7 +82,8 @@
       "生成不存在的论文、数据、DOI、工具结果或期刊要求",
       "越过停止条件：问题和纳排标准未定时，不开始批量筛选。"
     ],
-    "expected_next": []
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "counterexample-6",
@@ -91,7 +96,8 @@
       "生成不存在的论文、数据、DOI、工具结果或期刊要求",
       "越过停止条件：问题和纳排标准未定时，不开始批量筛选。"
     ],
-    "expected_next": []
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-7",
@@ -105,7 +111,8 @@
       "在注册门通过前执行正式检索或导入",
       "写入用户账号、邮箱、令牌或绝对路径"
     ],
-    "expected_next": []
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "counterexample-8",
@@ -119,7 +126,8 @@
       "回填注册时间",
       "把早于注册的检索冒充正式检索"
     ],
-    "expected_next": []
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "counterexample-9",
@@ -132,6 +140,7 @@
       "覆盖已注册版本",
       "更新本地哈希来掩盖变化"
     ],
-    "expected_next": []
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   }
 ]

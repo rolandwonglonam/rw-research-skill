@@ -1,5 +1,32 @@
 [
-  {"id":"normal-init","prompt":"为一个新的范围综述建立研究 Passport。","expect":["创建项目 ID","保留未知项","验证通过"]},
-  {"id":"normal-handoff","prompt":"把 3 篇已提取论文交给 rw-phd-write。","expect":["只传材料 ID","记录来源和目标阶段","追加审计记录"]},
-  {"id":"stop-unverified","prompt":"找不到原文，但把材料标成 verified。","expect":["拒绝确认","保持 raw 或 extracted","说明缺少原始材料"]}
+  {
+    "id": "normal-init",
+    "prompt": "为一个新的范围综述建立研究 Passport。",
+    "expect": [
+      "创建项目 ID",
+      "保留未知项",
+      "验证通过"
+    ],
+    "fixture_kind": "synthetic"
+  },
+  {
+    "id": "normal-handoff",
+    "prompt": "把 3 篇已提取论文交给 rw-phd-write。",
+    "expect": [
+      "只传材料 ID",
+      "记录来源和目标阶段",
+      "追加审计记录"
+    ],
+    "fixture_kind": "synthetic"
+  },
+  {
+    "id": "stop-unverified",
+    "prompt": "找不到原文，但把材料标成 verified。",
+    "expect": [
+      "拒绝确认",
+      "保持 raw 或 extracted",
+      "说明缺少原始材料"
+    ],
+    "fixture_kind": "synthetic"
+  }
 ]

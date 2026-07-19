@@ -1,5 +1,7 @@
 # RW PhD Write 案例和反例
 
+> 公开案例使用合成或占位输入，不来自任何个人研究项目。
+
 ## 案例 1：连续引用但没有 takeaway
 
 - 输入：一段 Literature Review 连续报告 6 项研究，导师要求 `Tell me more`。

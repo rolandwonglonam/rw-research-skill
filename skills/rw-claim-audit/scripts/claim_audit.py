@@ -101,6 +101,21 @@ def validate(data: dict[str, Any]) -> list[str]:
     return errors
 
 
+def validate_audit(data: dict[str, Any], audit_path: Path) -> list[str]:
+    errors = validate(data)
+    if errors:
+        return errors
+    document = Path(data["document_path"])
+    if not document.is_absolute():
+        document = audit_path.parent / document
+    if not document.is_file():
+        errors.append(f"document file is missing: {document}")
+        return errors
+    if file_hash(document) != data["document_hash"]:
+        errors.append("document_hash does not match the current document")
+    return errors
+
+
 def gate_status(data: dict[str, Any]) -> str:
     if not data["claims"]:
         return "REVIEW"
@@ -118,10 +133,13 @@ def command_init(args: argparse.Namespace) -> int:
         print(f"refusing to overwrite existing file: {output}")
         return 2
     document = Path(args.document_path)
+    if not document.is_file():
+        print(f"document file is missing: {document}")
+        return 2
     data = {
         "schema_version": SCHEMA_VERSION,
         "document_id": args.document_id,
-        "document_path": args.document_path,
+        "document_path": str(document.resolve()),
         "document_hash": file_hash(document),
         "audited_at": now(),
         "claims": [],
@@ -147,7 +165,7 @@ def command_add_claim(args: argparse.Namespace) -> int:
         "notes": "",
     })
     data["audited_at"] = now()
-    errors = validate(data)
+    errors = validate_audit(data, path)
     if errors:
         print("\n".join(errors))
         return 2
@@ -157,8 +175,9 @@ def command_add_claim(args: argparse.Namespace) -> int:
 
 
 def command_validate(args: argparse.Namespace) -> int:
+    path = Path(args.audit)
     try:
-        errors = validate(load(Path(args.audit)))
+        errors = validate_audit(load(path), path)
     except (OSError, json.JSONDecodeError, ValueError) as exc:
         print(f"invalid audit: {exc}")
         return 2
@@ -170,8 +189,9 @@ def command_validate(args: argparse.Namespace) -> int:
 
 
 def command_summary(args: argparse.Namespace) -> int:
-    data = load(Path(args.audit))
-    errors = validate(data)
+    path = Path(args.audit)
+    data = load(path)
+    errors = validate_audit(data, path)
     if errors:
         print("\n".join(errors))
         return 2
@@ -181,14 +201,52 @@ def command_summary(args: argparse.Namespace) -> int:
 
 
 def command_gate(args: argparse.Namespace) -> int:
-    data = load(Path(args.audit))
-    errors = validate(data)
+    path = Path(args.audit)
+    data = load(path)
+    errors = validate_audit(data, path)
     if errors:
         print("\n".join(errors))
         return 2
     status = gate_status(data)
     print(status)
     return {"PASS": 0, "REVIEW": 1, "BLOCK": 2}[status]
+
+
+def command_set_verdict(args: argparse.Namespace) -> int:
+    path = Path(args.audit)
+    data = load(path)
+    claim = next((item for item in data.get("claims", []) if isinstance(item, dict) and item.get("id") == args.claim_id), None)
+    if claim is None:
+        print(f"claim not found: {args.claim_id}")
+        return 2
+    source_values = [args.source_id, args.source_pointer, args.locator, args.support_note]
+    if any(source_values) and not all(source_values):
+        print("source-id, source-pointer, locator, and support-note must be provided together")
+        return 2
+    if args.source_id:
+        source_ref = {
+            "id": args.source_id,
+            "source_pointer": args.source_pointer,
+            "locator": args.locator,
+            "support_note": args.support_note,
+        }
+        refs = claim.setdefault("source_refs", [])
+        existing = next((index for index, item in enumerate(refs) if isinstance(item, dict) and item.get("id") == args.source_id), None)
+        if existing is None:
+            refs.append(source_ref)
+        else:
+            refs[existing] = source_ref
+    claim["verdict"] = args.verdict
+    if args.notes is not None:
+        claim["notes"] = args.notes
+    data["audited_at"] = now()
+    errors = validate_audit(data, path)
+    if errors:
+        print("\n".join(errors))
+        return 2
+    atomic_write(path, data)
+    print(f"updated {args.claim_id}: {args.verdict}")
+    return 0
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -208,6 +266,17 @@ def build_parser() -> argparse.ArgumentParser:
     add_parser.add_argument("--location", required=True)
     add_parser.add_argument("--claim-type", choices=sorted(CLAIM_TYPES), required=True)
     add_parser.set_defaults(func=command_add_claim)
+
+    verdict_parser = subparsers.add_parser("set-verdict")
+    verdict_parser.add_argument("audit")
+    verdict_parser.add_argument("--claim-id", required=True)
+    verdict_parser.add_argument("--verdict", choices=sorted(VERDICTS), required=True)
+    verdict_parser.add_argument("--source-id")
+    verdict_parser.add_argument("--source-pointer")
+    verdict_parser.add_argument("--locator")
+    verdict_parser.add_argument("--support-note")
+    verdict_parser.add_argument("--notes")
+    verdict_parser.set_defaults(func=command_set_verdict)
 
     for name, function in [("validate", command_validate), ("summary", command_summary), ("gate", command_gate)]:
         sub = subparsers.add_parser(name)

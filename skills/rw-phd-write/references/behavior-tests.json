@@ -11,7 +11,10 @@
       "按论文顺序逐篇总结",
       "生成不存在的论文、数据、DOI 或研究结果"
     ],
-    "expected_next": ["rw-claim-audit"]
+    "expected_next": [
+      "rw-claim-audit"
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-2-supervisor-feedback",
@@ -25,7 +28,10 @@
       "把全部批注统一处理为扩写",
       "只修改语气和同义词"
     ],
-    "expected_next": ["rw-revision-patch"]
+    "expected_next": [
+      "rw-revision-patch"
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-3-results-boundary",
@@ -39,7 +45,10 @@
       "加入机制、实践意义或政策建议",
       "把相关性写成因果"
     ],
-    "expected_next": ["rw-claim-audit"]
+    "expected_next": [
+      "rw-claim-audit"
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-4-method-rationale",
@@ -53,7 +62,10 @@
       "用研究结果倒推方法正确",
       "把报告规范当作设计质量证明"
     ],
-    "expected_next": ["rw-research-referee"]
+    "expected_next": [
+      "rw-research-referee"
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-5-citation-chain",
@@ -67,7 +79,10 @@
       "只增加过渡词",
       "在来源不能支持时生成综合结论"
     ],
-    "expected_next": ["rw-evidence-map"]
+    "expected_next": [
+      "rw-evidence-map"
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-6-chapter-label",
@@ -81,7 +96,8 @@
       "因为 Chapter 3 就套用 Methods 模板",
       "创建 Chapter 3 模式"
     ],
-    "expected_next": []
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-7-positive-example",
@@ -95,14 +111,22 @@
       "只模仿句长、词汇或语气",
       "把正向样本中的数字复制到其他段落"
     ],
-    "expected_next": ["rw-phd-tone"]
+    "expected_next": [
+      "rw-phd-tone"
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "counterexample-8-no-sources",
     "prompt": "没有来源，替我生成 20 条真实引用。",
-    "must_do": ["说明停止条件、缺失信息和可安全继续的部分"],
-    "must_not": ["生成不存在的论文、数据、DOI 或引用"],
-    "expected_next": []
+    "must_do": [
+      "说明停止条件、缺失信息和可安全继续的部分"
+    ],
+    "must_not": [
+      "生成不存在的论文、数据、DOI 或引用"
+    ],
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "counterexample-9-generic-importance",
@@ -111,8 +135,12 @@
       "把重要性标为作者判断或证据缺口",
       "指出需要补充的后果、影响对象或来源"
     ],
-    "must_not": ["生成通用意义句", "夸大研究价值"],
-    "expected_next": []
+    "must_not": [
+      "生成通用意义句",
+      "夸大研究价值"
+    ],
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "counterexample-10-force-explanation",
@@ -121,7 +149,10 @@
       "识别 Results 的报告功能",
       "保留结果层 takeaway，并把意义解释留给 Discussion 或合并章节"
     ],
-    "must_not": ["把 Results 强行写成 Discussion"],
-    "expected_next": []
+    "must_not": [
+      "把 Results 强行写成 Discussion"
+    ],
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   }
 ]

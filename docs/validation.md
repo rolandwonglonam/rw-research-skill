@@ -1,24 +1,38 @@
-# RW Research Skill v0.7.0 验收
+# RW Research Skill v0.7.1 验证记录
 
-日期：2026-07-15。
+日期：2026-07-19。
 
-- 发布 Skill：18 个，全部为科研 Skill。
+## 当前证据
+
+- 发布 Skill：19 个。
 - License：Apache-2.0。
-- 科研组：440 条原子、140 条公理、103 个案例和反例、107 个行为合同。
-- 独立运行自检：18／18 通过。
-- 正常场景测试：输入“测量工具结果冲突＋研究设计共同限制”，能够生成不同类型的候选方向，并把相似研究核验列为下一步。
-- 停止条件测试：输入“单一数据库没有结果”，拒绝使用“世界首次”表述，返回补充检索要求。
-- Research Passport 测试：2 篇论文分别保持 `raw` 和 `extracted`，缺失 DOI 和路径进入未知项，不补造材料。
-- Claim Audit 测试：18% 被写成 20%，同时把观察性结果写成因果，Gate 返回 `BLOCK`。
-- Revision Patch 测试：5 个 Markdown 块只修改 1 个，保留比例为 `0.8`；旧 hash 会整批停止。
-- PhD Write 功能判断测试：Chapter 编号不决定写作功能；连续引用触发综合判断检查；Results 不被强行加入 Discussion 语言。
-- Research Data 测试：只有“向作者索取”文字但没有申请入口、审批人和已生效标识符时，返回 `BLOCK`，不生成 DOI 或访问记录。
-- Statistics Audit 测试：3 次独立实验各有 3 个技术孔，图注写 `n=9` 时返回 `BLOCK`，要求回到独立实验层级，不从截图重算。
-- Literature Discovery 测试：OpenAlex 超时进入失败来源记录；全文、摘要和元数据使用不同可取得层级，不声称检索完整。
-- Journal Submission 测试：一条意见的两个要求拆成稳定子项，未获作者确认的新分析保持待确认，旧修改位置标为失效。
+- 469 条知识原子、149 条公理、115 个案例和反例、116 条行为合同。
+- 19 个 Skill 的静态自检通过。
+- 仓库版本、manifest、目录、公开计数和 Skill 接续检查通过。
+- 公共内容检查覆盖 315 个文件、469 条知识原子、115 个案例和 116 条行为合同，失败项为 0。
+- 知识原子不保留原始个人材料字段；案例和行为合同标记为合成输入。
+- `rw-citation-audit` 独立结构检查通过。
+- 确定性 Python 工具测试见仓库 `tests/` 和 CI 记录。
+
+## 证据边界
+
+- 行为合同保存输入和预期约束，当前构建不会调用模型执行全部合同。
+- 静态自检证明文件、结构、数量和独立运行约束符合当前发布要求，不证明模型输出质量。
+- v0.7.0 记录的场景结果属于维护者记录。仓库没有同时保存完整模型输出、模型版本、参数、判分和重放日志，因此不作为独立复现证据。
+- 当前没有 without-skill 基线、盲评、held-out 路由评测或跨模型效果证据。
+- 当前状态：`STATIC-CHECKED`。工具化 Skill 可作为 `TRIAL-CANDIDATE`，不标记 `VERIFIED EFFECTIVE`。
+
+## 发布边界
+
 - 本地硬依赖：0。
 - 私人工作区路由：0。
 - 真实业务材料：0。
-- 业务、团队、内容和状态模块：0。
-- SkillHub 公共版：49 个文件，隐私扫描和本地预检通过。
-- 本地发布包：`dist/rw-research-skill-0.7.0.zip` 已生成。
+- SkillHub 公共版保留公开来源入口，不包含私人来源摘录和本地研究材料。
+- 完整发行包和 SkillHub 公共版共用 `scripts/check_public_privacy.py` 构建门。
+- 安装路径使用仓库和 `npx skills add`。GitHub Release 不附带安装 zip。
+
+## 下一步证据
+
+- 为 `rw-claim-audit`、`rw-revision-patch` 和 `rw-research-passport`保存可重放 fixture 和确定性测试。
+- 使用真实任务做 project-local paired eval。
+- Router 使用未出现在行为合同中的 held-out 任务单独评测。
