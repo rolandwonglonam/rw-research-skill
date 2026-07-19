@@ -14,6 +14,7 @@ flowchart LR
   stats["rw-statistics-audit"]
   referee["rw-research-referee"]
   passport["rw-research-passport"]
+  citation["rw-citation-audit"]
   audit["rw-claim-audit"]
   patch["rw-revision-patch"]
   write["rw-phd-write"]
@@ -27,6 +28,7 @@ flowchart LR
   router --> data
   router --> stats
   router --> passport
+  router --> citation
   router --> audit
   router --> patch
   router --> tools
@@ -59,6 +61,7 @@ flowchart LR
   referee --> design
   referee --> write
   write --> tone
+  write --> citation
   write --> audit
   write --> patch
   write --> referee
@@ -66,6 +69,8 @@ flowchart LR
   tone --> write
   tone --> patch
   audit --> patch
+  citation --> audit
+  citation --> submission
   audit --> write
   patch --> audit
   patch --> submission
@@ -73,6 +78,7 @@ flowchart LR
   passport --> evidence
   passport --> write
   submission --> patch
+  submission --> citation
   submission --> audit
   submission --> data
   submission --> stats

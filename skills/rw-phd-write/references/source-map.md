@@ -6,12 +6,12 @@
 - `references/domain-guide.md`：任务选择和边界。
 - `references/atoms.jsonl`：可检索规则。
 - `references/cases.md`：案例和反例。
-- `references/writing-functions.md`：科研写作功能、解释义务和导师反馈分类。
+- `references/writing-functions.md`：科研写作功能、解释义务和评审意见分类。
 - `assets/worksheet.md`：输出模板。
 
-## 用户提供的实践反馈
+## 包内写作规则
 
-- 2026-07-14 的 PhD 导师反馈案例：用于形成写作功能判断、读者推断检查、正向样本校准和行为测试。只保留去标识后的判断，不作为公开研究证据。
+- 写作功能判断、读者推断检查、正向样本校准和行为合同由包内规则提供，不包含个人文稿或评审记录。
 
 ## 公开来源
 

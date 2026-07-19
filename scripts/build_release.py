@@ -21,6 +21,15 @@ def frontmatter_name(path: Path) -> str:
 
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
+    repository_check = subprocess.run(
+        [sys.executable, str(root / "scripts" / "check_repository.py")],
+        capture_output=True,
+        text=True,
+    )
+    if repository_check.returncode:
+        print(repository_check.stdout, end="")
+        print(repository_check.stderr, end="")
+        raise SystemExit("repository check failed")
     version = (root / "VERSION").read_text(encoding="utf-8").strip()
     manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
     plugin = json.loads((root / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))

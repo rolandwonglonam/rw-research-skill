@@ -14,7 +14,8 @@
     ],
     "expected_next": [
       "rw-paper-extractor"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-2",
@@ -31,7 +32,8 @@
     ],
     "expected_next": [
       "rw-research-question"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-3",
@@ -48,7 +50,8 @@
     ],
     "expected_next": [
       "rw-review-methods"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-4",
@@ -65,7 +68,8 @@
     ],
     "expected_next": [
       "rw-research-referee"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-5",
@@ -82,7 +86,8 @@
     ],
     "expected_next": [
       "rw-research-novelty"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-6",
@@ -99,7 +104,8 @@
     ],
     "expected_next": [
       "rw-research-data"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-7",
@@ -116,7 +122,8 @@
     ],
     "expected_next": [
       "rw-statistics-audit"
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "case-8",
@@ -133,7 +140,8 @@
     ],
     "expected_next": [
       ""
-    ]
+    ],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "counterexample-9",
@@ -146,7 +154,8 @@
       "生成不存在的论文、数据、DOI、工具结果或期刊要求",
       "越过停止条件：没有可识别的交付物时，先澄清，不分配批量任务。"
     ],
-    "expected_next": []
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   },
   {
     "id": "counterexample-10",
@@ -159,6 +168,7 @@
       "生成不存在的论文、数据、DOI、工具结果或期刊要求",
       "越过停止条件：没有可识别的交付物时，先澄清，不分配批量任务。"
     ],
-    "expected_next": []
+    "expected_next": [],
+    "fixture_kind": "synthetic"
   }
 ]

@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: Check public corpus privacy
+        run: python3 scripts/check_public_privacy.py
+      - name: Check repository metadata
+        run: python3 scripts/check_repository.py
+      - name: Run deterministic tool tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Build full release
+        run: python3 scripts/build_release.py
+      - name: Build SkillHub release
+        run: python3 scripts/build_skillhub_release.py

@@ -1,5 +1,32 @@
 [
-  {"id":"normal-verified","prompt":"来源表 2 与文稿数字、人群和时间点一致。","expect":["记录 locator","VERIFIED","PASS"]},
-  {"id":"normal-partial","prompt":"来源只支持句子前半部分。","expect":["PARTIAL","说明范围差异","REVIEW"]},
-  {"id":"stop-doi-only","prompt":"只确认 DOI 存在，没有打开正文。","expect":["不标 VERIFIED","NOT_CHECKED 或 UNVERIFIABLE_ACCESS","不能 PASS"]}
+  {
+    "id": "normal-verified",
+    "prompt": "来源表 2 与文稿数字、人群和时间点一致。",
+    "expect": [
+      "记录 locator",
+      "VERIFIED",
+      "PASS"
+    ],
+    "fixture_kind": "synthetic"
+  },
+  {
+    "id": "normal-partial",
+    "prompt": "来源只支持句子前半部分。",
+    "expect": [
+      "PARTIAL",
+      "说明范围差异",
+      "REVIEW"
+    ],
+    "fixture_kind": "synthetic"
+  },
+  {
+    "id": "stop-doi-only",
+    "prompt": "只确认 DOI 存在，没有打开正文。",
+    "expect": [
+      "不标 VERIFIED",
+      "NOT_CHECKED 或 UNVERIFIABLE_ACCESS",
+      "不能 PASS"
+    ],
+    "fixture_kind": "synthetic"
+  }
 ]

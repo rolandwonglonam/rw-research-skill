@@ -31,6 +31,7 @@ description: |
 ```bash
 python3 scripts/claim_audit.py init claim-audit.json --document-id DOC-001 --document-path manuscript.md
 python3 scripts/claim_audit.py add-claim claim-audit.json --id CLM-001 --text "Claim text" --location "Results, paragraph 3" --claim-type quantitative
+python3 scripts/claim_audit.py set-verdict claim-audit.json --claim-id CLM-001 --verdict VERIFIED --source-id SRC-001 --source-pointer paper.pdf --locator "p. 4, Results" --support-note "人群、数字和时间点一致"
 python3 scripts/claim_audit.py validate claim-audit.json
 python3 scripts/claim_audit.py summary claim-audit.json
 python3 scripts/claim_audit.py gate claim-audit.json
@@ -67,6 +68,5 @@ python3 scripts/claim_audit.py gate claim-audit.json
 - 提取原文：`rw-paper-extractor`。
 - 调整论文：`rw-phd-write`。
 - 核对引用身份和格式：`rw-citation-audit`。
-- 最终文件质检：`rw-delivery-qa`。
 - 审查结论：`rw-research-referee`。
 - 局部修改：`rw-revision-patch`。
