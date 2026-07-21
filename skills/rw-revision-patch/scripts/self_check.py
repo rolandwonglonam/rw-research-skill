@@ -24,6 +24,8 @@ def main() -> int:
         errors.append("need at least 10 atoms")
     if len(tests) < 3:
         errors.append("need at least 3 behavior tests")
+    if "normal-comment-span" not in {test.get("id") for test in tests}:
+        errors.append("comment-span behavior test missing")
     if "TODO" in (ROOT / "SKILL.md").read_text(encoding="utf-8"):
         errors.append("SKILL.md contains TODO")
     if errors:

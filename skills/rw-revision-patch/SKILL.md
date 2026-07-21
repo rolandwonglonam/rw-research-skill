@@ -31,10 +31,11 @@ python3 scripts/revision_patch.py apply draft.anchored.md --manifest draft.manif
 
 1. 固定基础文稿和版本 hash。
 2. 把标题、段落、列表或代码块按空行边界编号。
-3. 将每项修改连接到块 ID、旧 hash、理由和 issue ID。
-4. 先验证所有操作；任意一项失败时不生成部分结果。
-5. 生成新文件，不覆盖原文件。
-6. 输出修改块、保留块、保留比例和新 hash。
+3. 先确定每条批注对应的完整论证单位。批注框选的词句只是问题位置，不自动等于修改边界；必要时把同段前后句纳入同一 replace。
+4. 将每项修改连接到块 ID、旧 hash、理由和 issue ID。需要跨块、增删或重排时，先说明范围并转入相应流程。
+5. 先验证所有操作；任意一项失败时不生成部分结果。
+6. 生成新文件，不覆盖原文件。
+7. 输出修改块、保留块、保留比例和新 hash。
 
 ## 运行规则
 
@@ -45,6 +46,8 @@ python3 scripts/revision_patch.py apply draft.anchored.md --manifest draft.manif
 - `new_text` 不能包含 RW block marker。
 - 任意 precondition 失败时整批停止。
 - 未涉及块的正文保持原样。
+- 局部批注限制未经批准的改动范围，不要求修改只停留在高亮词句。内容正确性需要在完整论证单位上复核。
+- “Expand”“Tell me more”“I don't understand”不能只通过增加字数、例子或同义词关闭。先检查主体、对象、行动、发生环节、作用关系、适用边界和当前意义是否仍需读者猜测。
 - 新增、删除、重排章节进入结构修改，不伪装成局部替换。
 - Patch 只能限制改动范围，不能证明修改内容正确。
 
@@ -55,6 +58,7 @@ python3 scripts/revision_patch.py apply draft.anchored.md --manifest draft.manif
 - Patch JSON。
 - Revised Markdown 新文件。
 - Apply report JSON，包含 preserved ratio 和修改追踪。
+- 每条批注的论证单位、修改边界理由和仍未闭合的问题。
 
 ## 停止条件
 
@@ -62,6 +66,7 @@ python3 scripts/revision_patch.py apply draft.anchored.md --manifest draft.manif
 - hash、块 ID 或基础文稿不匹配时停止。
 - 修改比例超过 60% 且用户没有明确批准时停止。
 - 需要新增、删除或重排章节时，改走结构修订流程。
+- 解决批注必须跨越用户尚未批准的块时，先报告所需范围，不静默扩大 Patch。
 
 ## 接续
 

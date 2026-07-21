@@ -1,7 +1,7 @@
 {
   "skill": "rw-phd-write",
-  "version": "standalone-v2",
-  "generated_at": "2026-07-14",
+  "version": "standalone-v3",
+  "generated_at": "2026-07-20",
   "standalone": true,
   "local_hard_dependencies": [],
   "optional_integrations": [
@@ -9,9 +9,9 @@
     "internet access",
     "other RW skills"
   ],
-  "atom_count": 40,
-  "axiom_count": 13,
-  "behavior_test_count": 10,
+  "atom_count": 41,
+  "axiom_count": 14,
+  "behavior_test_count": 11,
   "public_source_count": 6,
   "practice_source_count": 1,
   "grounding_status": "public-source-and-practice-grounded"

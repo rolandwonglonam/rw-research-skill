@@ -66,6 +66,46 @@ def command_version(command: str) -> str:
         return "unavailable"
 
 
+def provider_preflight(models: list[dict[str, Any]]) -> dict[str, Any]:
+    providers = {model.get("provider") for model in models}
+    checks: dict[str, Any] = {}
+    failures: list[str] = []
+    if "codex" in providers:
+        binary = shutil.which("codex")
+        auth_file = Path.home() / ".codex" / "auth.json"
+        ready = bool(binary and auth_file.is_file())
+        checks["codex"] = {"binary": binary or "unavailable", "auth_file_present": auth_file.is_file(), "ready": ready}
+        if not ready:
+            failures.append("Codex CLI or ~/.codex/auth.json is unavailable")
+    if "claude" in providers:
+        binary = shutil.which("claude")
+        logged_in = False
+        auth_method = "none"
+        detail = ""
+        if binary:
+            try:
+                result = subprocess.run(
+                    [binary, "auth", "status"], capture_output=True, text=True, timeout=15, check=False
+                )
+                detail = (result.stdout or result.stderr).strip()
+                status = json.loads(result.stdout) if result.stdout.strip() else {}
+                logged_in = bool(status.get("loggedIn"))
+                auth_method = str(status.get("authMethod", "none"))
+            except (OSError, subprocess.TimeoutExpired, json.JSONDecodeError) as exc:
+                detail = f"{type(exc).__name__}: {exc}"
+        ready = bool(binary and logged_in)
+        checks["claude"] = {
+            "binary": binary or "unavailable",
+            "logged_in": logged_in,
+            "auth_method": auth_method,
+            "ready": ready,
+            "detail": sanitized_stderr(detail),
+        }
+        if not ready:
+            failures.append("Claude CLI is not logged in; run `claude auth login` once with the Claude subscription")
+    return {"checks": checks, "failures": failures}
+
+
 def git_sha() -> str:
     result = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=False)
     return result.stdout.strip() or "unknown"
@@ -492,6 +532,10 @@ def command_run(args: argparse.Namespace) -> int:
     if missing_models or missing_fixtures:
         print(json.dumps({"missing_models": missing_models, "missing_fixtures": missing_fixtures}, indent=2))
         return 2
+    preflight = provider_preflight(selected_models)
+    if preflight["failures"]:
+        print(json.dumps({"status": "PREFLIGHT_BLOCKED", **preflight}, ensure_ascii=False, indent=2))
+        return 2
     combinations = [
         (model, fixture, condition, repetition)
         for repetition in range(1, args.repetitions + 1)
@@ -573,6 +617,18 @@ def command_summarize(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_preflight(args: argparse.Namespace) -> int:
+    models = load_json(Path(args.models))
+    selected = [model for model in models if not args.model or model["id"] in args.model]
+    missing = sorted(set(args.model or []) - {model["id"] for model in selected})
+    if missing:
+        print(json.dumps({"missing_models": missing}, ensure_ascii=False, indent=2))
+        return 2
+    result = provider_preflight(selected)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 1 if result["failures"] else 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -580,6 +636,10 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("--fixtures", default=str(DEFAULT_FIXTURES))
     check.add_argument("--models", default=str(DEFAULT_MODELS))
     check.set_defaults(func=command_check)
+    preflight = subparsers.add_parser("preflight")
+    preflight.add_argument("--models", default=str(DEFAULT_MODELS))
+    preflight.add_argument("--model", action="append")
+    preflight.set_defaults(func=command_preflight)
     run = subparsers.add_parser("run")
     run.add_argument("--fixtures", default=str(DEFAULT_FIXTURES))
     run.add_argument("--models", default=str(DEFAULT_MODELS))

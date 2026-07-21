@@ -761,7 +761,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    scan = subparsers.add_parser("scan", help="build or update a local content index")
+    scan = subparsers.add_parser("scan", help="build or update a content index")
     scan.add_argument("--mode", choices=sorted(SUPPORTED_MODES), default="current")
     scan.add_argument("--root", type=Path, action="append", default=[])
     scan.add_argument("--state-dir", type=Path, required=True)

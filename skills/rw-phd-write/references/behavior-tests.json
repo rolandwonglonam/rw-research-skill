@@ -154,5 +154,24 @@
     ],
     "expected_next": [],
     "fixture_kind": "synthetic"
+  },
+  {
+    "id": "case-11-conceptual-closure",
+    "fixture_kind": "synthetic",
+    "prompt": "导师在句子 ‘Each route depends on different products and decisions’ 上批注 ‘Please expand’. 请修改，但不要提前写后续章节的方法细节。",
+    "must_do": [
+      "把完整论证单位扩展到必要的前后句，而不是只替换被标出的句子",
+      "说明 route 指什么、谁作决定、改变什么对象、行动发生在哪里以及该区分为何影响当前论证",
+      "说明适用边界，并把需要来源支持的新事实交给核验"
+    ],
+    "must_not": [
+      "只为 products 和 decisions 各增加一个例子",
+      "用 source、option、factor、process 或 implementation 替换原抽象词后停止",
+      "为了完整提前加入后续章节的方法或未核验事实"
+    ],
+    "expected_next": [
+      "rw-claim-audit",
+      "rw-revision-patch"
+    ]
   }
 ]

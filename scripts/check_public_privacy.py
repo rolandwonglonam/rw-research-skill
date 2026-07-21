@@ -8,6 +8,11 @@ import re
 from pathlib import Path
 from typing import Any
 
+try:
+    from .build_skillhub_release import validate_skill_sources
+except ImportError:
+    from build_skillhub_release import validate_skill_sources
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ROOT / "skills"
@@ -51,6 +56,14 @@ def scan_text(text: str, label: str, failures: list[str]) -> None:
     for description, pattern in FORBIDDEN_TEXT.items():
         if pattern.search(text):
             failures.append(f"{label}: {description}")
+
+
+def skillhub_source_failures(skill: Path) -> list[str]:
+    try:
+        validate_skill_sources(skill)
+    except (json.JSONDecodeError, ValueError) as exc:
+        return [f"{skill.name}: SkillHub source validation failed: {exc}"]
+    return []
 
 
 def main() -> int:
@@ -118,6 +131,9 @@ def main() -> int:
             contracts += 1
             if contract.get("fixture_kind") != "synthetic":
                 failures.append(f"{path.relative_to(ROOT)}:{index}: fixture_kind must be synthetic")
+
+    for skill in sorted(path for path in SKILLS.iterdir() if path.is_dir()):
+        failures.extend(skillhub_source_failures(skill))
 
     result = {
         "files": files,

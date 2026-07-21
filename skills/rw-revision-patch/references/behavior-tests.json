@@ -10,6 +10,16 @@
     "fixture_kind": "synthetic"
   },
   {
+    "id": "normal-comment-span",
+    "fixture_kind": "synthetic",
+    "prompt": "导师只高亮一句话并要求 Expand，但问题的前提和边界位于同一段的前后句。",
+    "expect": [
+      "把高亮句作为问题位置而非论证边界",
+      "在已批准段落块内修复完整论证单位",
+      "报告实际修改范围和概念闭合结果"
+    ]
+  },
+  {
     "id": "stop-stale-hash",
     "prompt": "文稿在生成 Patch 后被改动。",
     "expect": [

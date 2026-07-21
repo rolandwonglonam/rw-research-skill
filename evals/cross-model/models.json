@@ -10,13 +10,13 @@
     "model": "gpt-5.6-terra"
   },
   {
-    "id": "anthropic-claude-sonnet",
-    "provider": "claude",
-    "model": "sonnet"
+    "id": "openai-gpt-5.6-luna",
+    "provider": "codex",
+    "model": "gpt-5.6-luna"
   },
   {
-    "id": "anthropic-claude-opus",
+    "id": "anthropic-claude-opus-4.8",
     "provider": "claude",
-    "model": "opus"
+    "model": "claude-opus-4-8"
   }
 ]

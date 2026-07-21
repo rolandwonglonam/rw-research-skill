@@ -11,6 +11,8 @@ The matrix covers:
 - `rw-research-passport`;
 - `rw-research-router` decisions.
 
+The current local model configuration contains Codex `gpt-5.6-sol`, `gpt-5.6-terra`, and `gpt-5.6-luna`, plus Claude `claude-opus-4-8`. Every recorded run freezes the model configuration hash. Historical runs remain evidence for the model configuration saved in their own result file, not for the current default file.
+
 `development-fixtures-v1.json` records the first matrix used to find specification gaps. It is not held-out evidence after those gaps were inspected. `fixtures.json` is the second suite. Its file hash is frozen in each run before model calls start.
 
 ## Design
@@ -38,3 +40,5 @@ A run can show cross-model behavior consistency for the included fixtures. It ca
 - every fixture passing on at least 75% of tested models.
 
 Skill increment is reported separately as the pass-rate difference between `with_skill` and `without_skill`.
+
+Real-document review is governed by `document-review-protocol.md`. It is not scored as package conformance and cannot receive `CROSS_MODEL_VERIFIED`.

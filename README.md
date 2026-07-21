@@ -24,7 +24,7 @@
 
 ---
 
-RW Research Skill 由 Roland Wayne 创建。当前版本：`v0.8.0`。当前包含 20 个科研 Skill、498 条知识原子、161 条公理、128 个案例和反例，以及 129 条行为合同。
+RW Research Skill 由 Roland Wayne 创建。当前版本：`v0.8.0`。当前包含 20 个科研 Skill、500 条知识原子、163 条公理、128 个案例和反例，以及 131 条行为合同。
 
 适用于手上有研究想法、论文、数据、研究方案、章节草稿或审稿意见，需要判断下一步的人。你可以直接提交材料，也可以只说现在卡在哪里。系统会选择一个主 Skill，每次处理当前一步。
 
@@ -264,15 +264,17 @@ $rw-research-lab-router 根据任务、数据和当前环境选择工具。
 
 公开包当前包含：
 
-- 498 条结构化知识原子。
-- 161 条运行公理。
+- 500 条结构化知识原子。
+- 163 条运行公理。
 - 128 个案例和反例。
-- 129 条行为合同。
+- 131 条行为合同。
 - 20 个独立运行静态自检脚本。
 
 行为合同保存提示词、应做事项、不应做事项和下一步，用于后续模型评测。静态自检只检查文件、结构、数量和独立运行约束，不代表模型已经执行全部行为合同，也不证明真实任务提效。
 
-2026-07-20 的跨模型配对验证使用 2 家提供方的 4 个模型入口和 8 个合成任务。带 Skill 条件通过 32／32，不带 Skill 条件通过 19／32，差值为 +40.625 个百分点。这个结果只适用于已记录的任务、模型和版本，不代表真实科研结果已经改善。评测协议和完整记录见 [`evals/cross-model/`](evals/cross-model/) 和 [结果摘要](evals/cross-model/results/2026-07-20-cross-model-v2/summary.md)。
+2026-07-20 的 v0.7.1 跨模型配对验证使用 2 家提供方的 4 个模型入口和 8 个合成任务。带 Skill 条件通过 32／32，不带 Skill 条件通过 19／32，差值为 +40.625 个百分点。这个结果只适用于结果文件保存的任务、模型和版本。它不适用于 v0.8.0 的默认模型表，也不代表真实科研结果已经改善。评测协议和完整记录见 [`evals/cross-model/`](evals/cross-model/) 和 [结果摘要](evals/cross-model/results/2026-07-20-cross-model-v2/summary.md)。
+
+v0.8.0 增加真实文档审阅入口。默认使用本机已登录的 Codex 和 Claude CLI，不要求 API key。当前模型表为 `gpt-5.6-sol`、`gpt-5.6-terra`、`gpt-5.6-luna` 和 `claude-opus-4-8`。汇总不按模型数量投票：Codex 与 Claude 都锚定到同一段原文时，才进入 cross-provider findings；只有 Codex 模型重复发现的问题单列。真实文档和结果必须保存在公开仓库外。使用方式见 [跨模型评测说明](evals/cross-model/README.md)。
 
 公开内容不包含个人论文、数据、评审记录、研究项目状态或个人来源标签。案例和行为合同使用合成或占位输入。规则见 [`docs/public-content-policy.md`](docs/public-content-policy.md)。
 
@@ -294,6 +296,14 @@ $rw-research-lab-router 根据任务、数据和当前环境选择工具。
 - 单个文件解析失败时标记为 `unreadable`，其他文件继续扫描。
 - 研究画像、索引和能力报告默认为本地私有状态，公开测试只使用合成材料。
 - `rw-research-router` 在用户不知道从哪里开始时，先路由到 `rw-research-learning`。
+
+## v0.8.0 更新
+
+- 默认模型表改为 Codex Sol、Terra、Luna 和 Claude Opus 4.8。
+- Claude 通过本机 Claude CLI 和现有登录状态运行，不经过本项目配置 API key。
+- 增加 `.md`、`.txt` 和 `.docx` 真实文档审阅入口。
+- 汇总按 provider 分组，不把 3 个 Codex 模型当作对 Claude 的多数票。
+- 真实文档、prompt 和结果不进入公开仓库。
 
 ## v0.7.1 更新
 

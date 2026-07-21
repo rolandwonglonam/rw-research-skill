@@ -40,7 +40,12 @@ def main() -> int:
     if maturity.get("behavior_test_count") != len(tests):
         failures.append("maturity behavior_test_count is stale")
     test_ids = {test.get("id") for test in tests}
-    required_test_ids = {"case-5-citation-chain", "case-6-chapter-label", "counterexample-10-force-explanation"}
+    required_test_ids = {
+        "case-5-citation-chain",
+        "case-6-chapter-label",
+        "counterexample-10-force-explanation",
+        "case-11-conceptual-closure",
+    }
     if not required_test_ids.issubset(test_ids):
         failures.append("writing-function behavior tests missing")
     if not maturity.get("standalone") or maturity.get("local_hard_dependencies"):

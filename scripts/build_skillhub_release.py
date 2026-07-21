@@ -78,6 +78,22 @@ def module_text(skill: Path) -> str:
     return "\n".join(parts) + "\n"
 
 
+def runtime_files(skill: Path):
+    for base_name in ("assets", "scripts"):
+        source = skill / base_name
+        if not source.is_dir():
+            continue
+        for path in sorted(source.rglob("*")):
+            if path.is_file() and path.name != "self_check.py" and path.suffix != ".pyc":
+                yield base_name, path
+
+
+def validate_skill_sources(skill: Path) -> None:
+    module_text(skill)
+    for _, path in runtime_files(skill):
+        public_text(path.read_text(encoding="utf-8"), path)
+
+
 def write_root(output: Path, version: str, skills: list[str]) -> None:
     items = "\n".join(f"- `{name}`：见 `modules/{name}.md`。" for name in skills)
     (output / "SKILL.md").write_text(
@@ -141,17 +157,13 @@ def write_readme(output: Path, version: str, skills: list[str]) -> None:
 
 
 def copy_runtime_files(skill: Path, output: Path) -> None:
-    for base_name, target_name in (("assets", "templates"), ("scripts", "tools")):
+    target_names = {"assets": "templates", "scripts": "tools"}
+    for base_name, path in runtime_files(skill):
         source = skill / base_name
-        if not source.is_dir():
-            continue
-        for path in sorted(source.rglob("*")):
-            if not path.is_file() or path.name == "self_check.py" or path.suffix == ".pyc":
-                continue
-            destination = output / target_name / skill.name / path.relative_to(source)
-            destination.parent.mkdir(parents=True, exist_ok=True)
-            content = path.read_text(encoding="utf-8")
-            destination.write_text(public_text(content, path), encoding="utf-8")
+        destination = output / target_names[base_name] / skill.name / path.relative_to(source)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        content = path.read_text(encoding="utf-8")
+        destination.write_text(public_text(content, path), encoding="utf-8")
 
 
 def validate(output: Path) -> list[Path]:
@@ -188,6 +200,7 @@ def main() -> int:
     shutil.copy2(root / "LICENSE", output / "LICENSE")
     for name in skills:
         skill = root / "skills" / name
+        validate_skill_sources(skill)
         module = output / "modules" / f"{name}.md"
         module.parent.mkdir(parents=True, exist_ok=True)
         module.write_text(module_text(skill), encoding="utf-8")
