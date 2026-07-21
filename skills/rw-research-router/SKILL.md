@@ -1,7 +1,7 @@
 ---
 name: rw-research-router
 description: |
-  判断科研任务所处阶段，并把它交给一个主流程。 Use when the user asks for “新手入门”、“启动科研流程”、“这个研究任务该用什么”、“帮我选科研 skill”, or requests the rw-research-router workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
+  判断科研任务所处阶段，并把它交给一个主流程；用户不知道从哪里开始、想学科研主题或要求分析现有科研能力时，先进入 rw-research-learning 发现并扫描现有积累。Use when the user asks for “新手入门”“带我学一个科研主题”“分析我的科研能力”“看看我会什么”“根据我的本地内容决定下一步”“我不知道从哪里开始”“这个研究任务该用什么”“帮我选科研 skill”, or requests the rw-research-router workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---
 
 # RW Research Router
@@ -22,18 +22,18 @@ description: |
 用户说“新手入门”或第一次使用本包时：
 
 1. 不展示完整 Skill 清单，不要求用户先理解工作流名称。
-2. 第一轮只问用户现在手上有什么，可按想法、文献、数据、草稿、审稿意见或不知道回答。
-3. 第二轮只问这次想得到什么结果；如果第一轮已经说清楚，不重复提问。
-4. 根据回答选择一个主 Skill，说明需要提供什么材料、做到哪里停止、怎样算完成。
-5. 用户回答不知道时，询问当前最卡住的一件事，不让用户自行选择 Skill。
-6. 一轮只推进一个入口；用户确认后再进入对应 Skill。
+2. 用户指定文件夹时，直接选择 `rw-research-learning` 深扫该目录；用户未限制范围时，同时发现当前项目中的相关内容目录。
+3. 用户没有指定路径时，优先运行元数据范围发现，再扫描当前项目和环境允许读取的相关用户内容。
+4. 用户表示“不知道”或要求学习主题时，直接选择 `rw-research-learning`，先从已有内容判断基础。
+5. 只有没有可读路径、当前项目或用户材料时，才每轮追问一个必要问题。
+6. 一轮只推进一个入口；`rw-research-learning` 完成扫描和起点判断后，再选择后续主 Skill。
 
 
 ## 工作阶段
 
 1. 保留用户原问题和预期交付物。
 2. 确认研究阶段、研究类型、现有材料、截止时间和允许使用的来源。
-3. 判断当前瓶颈属于问题、发现、提取、证据、创新、设计、研究材料、统计报告、审查、写作、主张核验、引用核验、语气、交付、投稿或工具。
+3. 判断当前瓶颈属于学习起点、问题、发现、提取、证据、创新、设计、研究材料、统计报告、审查、写作、主张核验、引用核验、语气、交付、投稿或工具。
 4. 只选择一个主 Skill，说明选择理由和未选择其他路径的原因。
 5. 列出主 Skill 开始前必须补齐的输入和停止条件。
 6. 完成当前阶段后给出一个下一步，不同时启动整条链。
@@ -53,6 +53,7 @@ description: |
 - 用户提供的原始材料优先于 Skill 内的通用示例。
 - 本地集成不存在时，使用自带路由表继续。
 - 新手入门时一次只问一个问题，不把整个科研流程一次发给用户。
+- 用户不知道从哪里开始时，不先要求用户自评，先路由到 `rw-research-learning` 搜索已有积累。
 
 ## 输出
 

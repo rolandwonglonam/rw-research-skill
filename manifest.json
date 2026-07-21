@@ -1,10 +1,11 @@
 {
   "name": "rw-research-skill",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "license": "Apache-2.0",
   "channel": "preview",
   "skills": [
     "rw-research-router",
+    "rw-research-learning",
     "rw-research-question",
     "rw-literature-discovery",
     "rw-evidence-map",

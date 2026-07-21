@@ -3,6 +3,7 @@
 ```mermaid
 flowchart LR
   router["rw-research-router"]
+  learning["rw-research-learning"]
   question["rw-research-question"]
   discovery["rw-literature-discovery"]
   extractor["rw-paper-extractor"]
@@ -22,6 +23,12 @@ flowchart LR
   submission["rw-journal-submission"]
   tools["rw-research-lab-router"]
 
+  router --> learning
+  learning --> question
+  learning --> discovery
+  learning --> evidence
+  learning --> design
+  learning --> audit
   router --> question
   router --> discovery
   router --> novelty
