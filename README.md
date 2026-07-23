@@ -15,6 +15,7 @@
 
 <p align="center">
   <a href="#新手从这里开始">快速开始</a> ·
+  <a href="docs/RW-Research-Skill-从0到100.md">从 0 到 100 手册</a> ·
   <a href="#安装">安装</a> ·
   <a href="#常见场景与当前入口">常见场景</a> ·
   <a href="#4-个对外入口">4 个入口</a> ·
@@ -46,6 +47,8 @@ RW Research Skill 由 Roland Wayne 创建。当前版本：`v0.11.0`。对外提
 | 一个需要选择工具的科研任务 | 根据任务、数据和环境选择工具，不把工具当成研究判断 |
 
 ## 新手从这里开始
+
+第一次安装、部署或排错时，按 [《RW Research Skill 从 0 到 100》](docs/RW-Research-Skill-从0到100.md) 操作。
 
 安装后，在 Codex 中输入：
 
