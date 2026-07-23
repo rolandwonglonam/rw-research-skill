@@ -1,5 +1,7 @@
 ---
 name: rw-citation-audit
+metadata:
+  internal: true
 description: |
   核对文内引用、参考文献、作者身份、年份消歧、DOI 和指定格式规则，不判断来源是否支持主张。 Use when the user asks for “检查引用格式”、“核对文内引用和参考文献”、“检查同姓作者”、“做 citation audit”, or requests the rw-citation-audit workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---

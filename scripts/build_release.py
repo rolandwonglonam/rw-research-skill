@@ -66,7 +66,7 @@ def main() -> int:
     output = root / "dist" / f"{package_name}-{version}.zip"
     output.parent.mkdir(exist_ok=True)
     include_roots = [root / ".codex-plugin", root / "skills", root / "docs"]
-    include_files = [root / "SKILL.md", root / "README.md", root / "LICENSE", root / "VERSION", root / "manifest.json"]
+    include_files = [root / "README.md", root / "LICENSE", root / "VERSION", root / "manifest.json"]
     with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for base in include_roots:
             for path in sorted(p for p in base.rglob("*") if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"):

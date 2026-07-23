@@ -1,5 +1,7 @@
 ---
 name: rw-claim-audit
+metadata:
+  internal: true
 description: |
   逐条核验论文、报告或研究笔记中的事实性主张是否被指定来源原文支持，保存主张位置、来源指针、原文定位、判断和阻断状态。Use when the user asks for“检查引用是否支持这句话”“做 claim-to-source audit”“核验数字、趋势或因果说法”“投稿前查主张”,or requests the rw-claim-audit workflow.
 ---

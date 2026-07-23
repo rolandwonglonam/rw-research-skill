@@ -1,5 +1,7 @@
 ---
 name: rw-evidence-map
+metadata:
+  internal: true
 description: |
   把研究、构念、设计、样本、结果、偏倚、冲突和缺口组织成可追溯证据图。 Use when the user asks for “做证据地图”、“整理研究冲突”、“把文献连起来”, or requests the rw-evidence-map workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---

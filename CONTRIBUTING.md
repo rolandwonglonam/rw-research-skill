@@ -31,10 +31,10 @@
 提交前运行：
 
 ```bash
-python3 scripts/check_public_privacy.py
-python3 scripts/check_repository.py
-python3 -m unittest discover -s tests -v
+python3 scripts/run_ci_manifest.py
 ```
+
+CI 和 GitHub Release 使用同一个 [`ci/manifest.json`](ci/manifest.json)。降级条件、替代动作和禁止行为保存在 [`docs/degradation-registry.json`](docs/degradation-registry.json)。
 
 需要修改跨模型评测时，先阅读 [`evals/cross-model/protocol.md`](evals/cross-model/protocol.md)。已经运行过的任务不能改分后继续标记为 held-out。
 

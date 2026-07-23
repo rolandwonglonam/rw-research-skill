@@ -8,6 +8,15 @@ description: |
 
 根据用户提供的研究材料和可核验来源组织科研文本。先判断当前部分承担什么写作功能，再决定需要哪些证据、解释和连接。
 
+## 对外入口职责
+
+这是“论文写作与投稿”入口。用户可以提交写作任务、草稿、修改范围、审稿意见或投稿要求。
+
+- 本入口先判断写作功能和证据边界。
+- 作者语气接续 `rw-phd-tone`，批准范围内的修改接续 `rw-revision-patch`。
+- 投稿材料和期刊要求接续 `rw-journal-submission`。
+- 对外保持一个写作入口，内部接续不能绕过来源核验和修改范围。
+
 ## 启动
 
 1. 读取 `references/standalone.md`、`references/method.md`、`references/writing-functions.md` 和 `references/standards.md`。

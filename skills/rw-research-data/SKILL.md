@@ -1,5 +1,7 @@
 ---
 name: rw-research-data
+metadata:
+  internal: true
 description: |
   审查研究数据、代码和材料的可取得性、版本、标识符、限制和声明，不把公开等同于可复用。 Use when the user asks for “检查数据可用性”、“写 data availability statement”、“检查数据代码材料能否复用”, or requests the rw-research-data workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---

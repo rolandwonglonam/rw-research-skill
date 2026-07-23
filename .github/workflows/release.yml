@@ -18,8 +18,8 @@ jobs:
           set -euo pipefail
           version="$(tr -d '[:space:]' < VERSION)"
           test "v${version}" = "${GITHUB_REF_NAME}"
-      - name: Build release
-        run: python3 scripts/build_release.py
+      - name: Run release CI manifest
+        run: python3 scripts/run_ci_manifest.py
       - name: Create GitHub release if missing
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

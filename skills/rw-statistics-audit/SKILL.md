@@ -1,5 +1,7 @@
 ---
 name: rw-statistics-audit
+metadata:
+  internal: true
 description: |
   审查研究中的分析单位、重复层级、统计方法和结果报告是否对得上，不把报告审查当成重新分析。 Use when the user asks for “检查统计报告”、“核对 n 和重复实验”、“审查统计方法和结果”, or requests the rw-statistics-audit workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---

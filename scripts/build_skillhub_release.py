@@ -94,26 +94,31 @@ def validate_skill_sources(skill: Path) -> None:
         public_text(path.read_text(encoding="utf-8"), path)
 
 
-def write_root(output: Path, version: str, skills: list[str]) -> None:
-    items = "\n".join(f"- `{name}`：见 `modules/{name}.md`。" for name in skills)
+def write_root(output: Path, version: str, entries: list[dict], skills: list[str]) -> None:
+    items = "\n".join(
+        f"- `{entry['name']}`：{entry['label']}。{entry['intent']}"
+        for entry in entries
+    )
     (output / "SKILL.md").write_text(
         f"""---
 slug: rw-research-skill
 displayName: RW Research Skill
 version: {version}
-summary: 将研究问题、文献、证据、研究设计、论文草稿和投稿材料拆成当前可以核验的一步。
+summary: 通过 4 个入口处理研究启动、论文证据、研究审查和论文写作。
 license: Apache-2.0
 ---
 
 # RW Research Skill
 
-这个包包含 {len(skills)} 个科研模块。先读取 `modules/rw-research-router.md`，再按当前任务选择一个模块。
+这个包对外提供 {len(entries)} 个入口，内部保留 {len(skills)} 个科研模块。用户不需要先理解内部模块名称。
 
 用户可以提供研究想法、文献、数据、草稿、审稿意见，或直接说明卡在哪里。一次只推进当前一步。
 
-## 模块
+## 对外入口
 
 {items}
+
+入口和内部模块的归属见 `MANIFEST.json`。内部模块保存在 `modules/`，已有调用仍可继续使用。
 
 ## 边界
 
@@ -126,20 +131,20 @@ license: Apache-2.0
     )
 
 
-def write_readme(output: Path, version: str, skills: list[str]) -> None:
-    modules = "\n".join(f"- `{name}`" for name in skills)
+def write_readme(output: Path, version: str, entries: list[dict], skills: list[str]) -> None:
+    entry_items = "\n".join(f"- `{entry['name']}`：{entry['label']}。" for entry in entries)
     (output / "README.md").write_text(
         f"""# RW Research Skill
 
 版本：`{version}`
 
-这是 SkillHub 发行版。它保留 {len(skills)} 个科研模块的工作方法、知识原子、公理、案例、模板、公开来源入口和必要工具文件。每个模块的参考资料已合并。公共版不包含私人工作区说明、个人研究记录或本地决策来源。本地规则统一标为 `packaged_internal_rule`。
+这是 SkillHub 发行版。它对外提供 {len(entries)} 个入口，内部保留 {len(skills)} 个科研模块。每个模块的参考资料已合并。公共版不包含私人工作区说明、个人研究记录或本地决策来源。本地规则统一标为 `packaged_internal_rule`。
 
-## 模块
+## 对外入口
 
-{modules}
+{entry_items}
 
-构建规则见 `PUBLIC_RELEASE_POLICY.md`。
+内部模块归属见 `MANIFEST.json`。降级条件和替代动作见 `DEGRADATION_REGISTRY.json`，4 个入口的场景合同见 `DEGRADATION_SCENARIOS.json`。构建规则见 `PUBLIC_RELEASE_POLICY.md`。
 """,
         encoding="utf-8",
     )
@@ -190,14 +195,32 @@ def main() -> int:
     version = (root / "VERSION").read_text(encoding="utf-8").strip()
     manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
     skills = list(dict.fromkeys(manifest["skills"]))
+    entries = manifest["entry_skills"]
     output = root / "dist" / "skillhub"
     if output.exists():
         shutil.rmtree(output)
     output.mkdir(parents=True)
 
-    write_root(output, version, skills)
-    write_readme(output, version, skills)
+    write_root(output, version, entries, skills)
+    write_readme(output, version, entries, skills)
     shutil.copy2(root / "LICENSE", output / "LICENSE")
+    (output / "MANIFEST.json").write_text(
+        json.dumps(
+            {
+                "schema_version": "rw-entry-manifest/v1",
+                "name": manifest["name"],
+                "version": manifest["version"],
+                "entry_skills": entries,
+                "skills": skills,
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    shutil.copy2(root / "docs" / "degradation-registry.json", output / "DEGRADATION_REGISTRY.json")
+    shutil.copy2(root / "docs" / "degradation-scenarios.json", output / "DEGRADATION_SCENARIOS.json")
     for name in skills:
         skill = root / "skills" / name
         validate_skill_sources(skill)

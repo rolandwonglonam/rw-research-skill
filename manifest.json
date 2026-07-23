@@ -1,8 +1,59 @@
 {
   "name": "rw-research-skill",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "license": "Apache-2.0",
   "channel": "preview",
+  "entry_skills": [
+    {
+      "name": "rw-research-router",
+      "label": "研究启动与推进",
+      "intent": "判断当前研究阶段，处理学习起点、问题、检索、发现、创新、项目状态和工具接续。",
+      "routes": [
+        "rw-research-router",
+        "rw-research-learning",
+        "rw-research-question",
+        "rw-literature-discovery",
+        "rw-search-strategy",
+        "rw-research-novelty",
+        "rw-research-passport",
+        "rw-research-lab-router"
+      ]
+    },
+    {
+      "name": "rw-paper-extractor",
+      "label": "论文精读与证据",
+      "intent": "处理 PDF 工作区、论文提取、证据关系、引用核验和主张核验。",
+      "routes": [
+        "rw-paper-extractor",
+        "rw-evidence-map",
+        "rw-citation-audit",
+        "rw-claim-audit"
+      ]
+    },
+    {
+      "name": "rw-research-referee",
+      "label": "研究设计与审查",
+      "intent": "处理综述方法、研究设计、研究材料、统计报告和结论审查。",
+      "routes": [
+        "rw-research-referee",
+        "rw-review-methods",
+        "rw-research-design",
+        "rw-research-data",
+        "rw-statistics-audit"
+      ]
+    },
+    {
+      "name": "rw-phd-write",
+      "label": "论文写作与投稿",
+      "intent": "处理科研写作、作者语气、局部修订和投稿材料。",
+      "routes": [
+        "rw-phd-write",
+        "rw-phd-tone",
+        "rw-revision-patch",
+        "rw-journal-submission"
+      ]
+    }
+  ],
   "skills": [
     "rw-research-router",
     "rw-research-learning",

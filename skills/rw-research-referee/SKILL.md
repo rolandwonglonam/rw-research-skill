@@ -8,6 +8,15 @@ description: |
 
 在执行或投稿前检查研究结论所需证据、偏倚、替代解释和报告边界。
 
+## 对外入口职责
+
+这是“研究设计与审查”入口。用户可以提交综述协议、研究方案、数据材料、统计报告或待审结论。
+
+- 综述方法接续 `rw-review-methods`。
+- 研究方案接续 `rw-research-design`，数据和材料接续 `rw-research-data`。
+- 统计报告接续 `rw-statistics-audit`，结论审查由本入口完成。
+- 对用户只呈现当前审查对象和结论影响，不要求用户选择内部模块。
+
 ## 启动
 
 1. 读取 `references/standalone.md`、`references/method.md` 和 `references/standards.md`。

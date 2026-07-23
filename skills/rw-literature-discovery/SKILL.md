@@ -1,5 +1,7 @@
 ---
 name: rw-literature-discovery
+metadata:
+  internal: true
 description: |
   围绕具体判断发现、核验和记录文献，并根据证据修改搜索方向。 Use when the user asks for “找相关文献”、“做文献发现”、“补这个论证的来源”, or requests the rw-literature-discovery workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---

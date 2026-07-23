@@ -188,5 +188,91 @@
     ],
     "expected_next": [],
     "fixture_kind": "synthetic"
+  },
+  {
+    "id": "case-12-adhd-opt-in",
+    "prompt": "请用 ADHD 友好输出。我有一段带引用的 Discussion，需要检查来源是否支持主张。",
+    "must_do": [
+      "启用可选 ADHD 友好输出",
+      "先给只看这里、一个当前动作和本轮完成标准",
+      "加粗当前任务、用户动作、结论或阻断状态"
+    ],
+    "must_not": [
+      "同时要求用户完成多个主要动作",
+      "为了缩短输出删除证据边界或停止条件",
+      "保存用户的 ADHD 诊断信息"
+    ],
+    "expected_next": [
+      "rw-claim-audit"
+    ],
+    "fixture_kind": "synthetic"
+  },
+  {
+    "id": "counterexample-13-adhd-disclosure-only",
+    "prompt": "我有 ADHD。我有一篇带统计结果的文稿，需要检查分析单位和报告数字。",
+    "must_do": [
+      "保持普通输出",
+      "根据当前瓶颈选择 rw-statistics-audit"
+    ],
+    "must_not": [
+      "仅因用户披露 ADHD 自动启用 ADHD 友好输出",
+      "追问用户是否需要 ADHD 友好输出",
+      "保存用户的 ADHD 诊断信息"
+    ],
+    "expected_next": [
+      "rw-statistics-audit"
+    ],
+    "fixture_kind": "synthetic"
+  },
+  {
+    "id": "case-14-adhd-off",
+    "prompt": "上一轮开启了 ADHD 友好输出。现在关闭它，按普通方式继续检查研究设计。",
+    "must_do": [
+      "立即返回普通输出",
+      "根据当前瓶颈选择 rw-research-referee"
+    ],
+    "must_not": [
+      "继续强制使用只看这里、暂存区或恢复点",
+      "要求用户解释为什么关闭",
+      "保存用户的 ADHD 诊断信息"
+    ],
+    "expected_next": [
+      "rw-research-referee"
+    ],
+    "fixture_kind": "synthetic"
+  },
+  {
+    "id": "degradation-15-corpus-unavailable",
+    "prompt": "指定研究资料夹无法访问，但我已经在本轮提供研究问题。请继续判断下一步。",
+    "must_do": [
+      "范围缩小：未读取本地研究积累。",
+      "改用用户本轮提供的材料和包内方法，说明没有完成本地积累扫描。"
+    ],
+    "must_not": [
+      "不得声称已经扫描不可读目录，也不得把缺少本地集成写成任务失败。"
+    ],
+    "expected_next": [
+      "rw-research-question"
+    ],
+    "fixture_kind": "synthetic",
+    "degradation_registry_id": "DEG-006",
+    "expected_status": "REVIEW"
+  },
+  {
+    "id": "degradation-16-current-source-unavailable",
+    "prompt": "当前网络和订阅数据库都不可用。请先为这个研究问题准备检索策略。",
+    "must_do": [
+      "待核验：当前来源不可访问。",
+      "继续处理不依赖当前事实的部分，保存检索式、来源入口和核验日期空位。"
+    ],
+    "must_not": [
+      "不得把缓存内容、通用规则或候选词写成已核验的当前事实。"
+    ],
+    "expected_next": [
+      "rw-search-strategy"
+    ],
+    "fixture_kind": "synthetic",
+    "degradation_registry_id": "DEG-001",
+    "expected_status": "PENDING_VERIFICATION"
   }
 ]

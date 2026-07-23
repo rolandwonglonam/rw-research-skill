@@ -1,5 +1,7 @@
 ---
 name: rw-revision-patch
+metadata:
+  internal: true
 description: |
   将 Markdown 文稿切成带稳定 ID 和 hash 的段落块，只对用户批准的块执行替换，并输出保留比例、修改理由和问题追踪报告。Use when the user asks for“只改这几段”“按审稿意见局部修改”“保留其他内容不动”“生成可复核修改 patch”,or requests the rw-revision-patch workflow.
 ---

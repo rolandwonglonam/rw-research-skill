@@ -1,5 +1,7 @@
 ---
 name: rw-search-strategy
+metadata:
+  internal: true
 description: |
   把中英文研究问题拆成概念块，生成并核验 MeSH、Emtree、CINAHL Headings、APA Thesaurus 和平台检索式。 Use when the user asks for “生成 MeSH 检索词”、“把英文研究问题转成检索式”、“做 Emtree 或 CINAHL Headings”、“生成 PsycINFO 检索策略”、“翻译多数据库检索式”, or requests the rw-search-strategy workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---

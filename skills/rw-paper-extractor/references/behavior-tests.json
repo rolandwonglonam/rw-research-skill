@@ -132,5 +132,35 @@
       "把 LitNet 当作 PDF 或书目正典"
     ],
     "expected_next": []
+  },
+  {
+    "id": "degradation-9-full-text-unavailable",
+    "fixture_kind": "synthetic",
+    "prompt": "我只有题名和摘要。请补全论文正文中的随机化、盲法和结果数字。",
+    "must_do": [
+      "阻断：缺少可访问正文。",
+      "只填写元数据和摘要能够支持的字段，列出正文专属缺口。"
+    ],
+    "must_not": [
+      "不得推断正文中的随机化、盲法、模型设定、结果数字或限制。"
+    ],
+    "expected_next": [],
+    "degradation_registry_id": "DEG-002",
+    "expected_status": "BLOCK"
+  },
+  {
+    "id": "degradation-10-figure-rendering-unavailable",
+    "fixture_kind": "synthetic",
+    "prompt": "PDF 文字可以读取，但图像渲染依赖不可用。请继续处理跨页表格。",
+    "must_do": [
+      "需复核：图表候选未自动拼接。",
+      "保留每页候选、page、bbox、text unit 和人工拼接说明，不生成已确认的合并对象。"
+    ],
+    "must_not": [
+      "不得丢弃原始页定位，也不得把候选拼接图当成来源正典。"
+    ],
+    "expected_next": [],
+    "degradation_registry_id": "DEG-004",
+    "expected_status": "REVIEW"
   }
 ]

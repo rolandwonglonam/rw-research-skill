@@ -51,7 +51,8 @@ def main() -> int:
 
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     expected_intro = (
-        f"当前包含 {metrics['skills']} 个科研 Skill、{metrics['atoms']} 条知识原子、"
+        f"对外提供 {len(manifest.get('entry_skills', []))} 个入口，内部保留 {metrics['skills']} 个科研 Skill。"
+        f"当前包含 {metrics['atoms']} 条知识原子、"
         f"{metrics['axioms']} 条公理、{metrics['cases']} 个案例和反例，以及 {metrics['contracts']} 条行为合同。"
     )
     if expected_intro not in readme:
@@ -60,6 +61,30 @@ def main() -> int:
         failures.append("README still labels behavior contracts as executed tests")
     if f"当前版本：`v{version}`" not in readme:
         failures.append("README current version is stale")
+
+    entry_check = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "check_entry_points.py")],
+        capture_output=True,
+        text=True,
+    )
+    try:
+        entry_points = json.loads(entry_check.stdout)
+    except json.JSONDecodeError:
+        entry_points = {"failures": ["entry-point check did not return JSON"]}
+    if entry_check.returncode:
+        failures.extend(f"entry-points: {item}" for item in entry_points.get("failures", []))
+
+    degradation_check = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "check_degradation_registry.py")],
+        capture_output=True,
+        text=True,
+    )
+    try:
+        degradation = json.loads(degradation_check.stdout)
+    except json.JSONDecodeError:
+        degradation = {"failures": ["degradation check did not return JSON"]}
+    if degradation_check.returncode:
+        failures.extend(f"degradation: {item}" for item in degradation.get("failures", []))
 
     privacy_check = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "check_public_privacy.py")],
@@ -85,7 +110,15 @@ def main() -> int:
     if cross_model_check.returncode:
         failures.extend(f"cross-model: {item}" for item in cross_model.get("failures", []))
 
-    result = {"version": version, "metrics": metrics, "privacy": privacy, "cross_model": cross_model, "failures": failures}
+    result = {
+        "version": version,
+        "metrics": metrics,
+        "entry_points": entry_points,
+        "degradation": degradation,
+        "privacy": privacy,
+        "cross_model": cross_model,
+        "failures": failures,
+    }
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 1 if failures else 0
 

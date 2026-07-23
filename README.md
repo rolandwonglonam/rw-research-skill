@@ -1,7 +1,7 @@
 <p align="center">
   <a href="LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-2ea44f.svg"></a>
-  <a href="VERSION"><img alt="Version: v0.10.0" src="https://img.shields.io/badge/version-v0.10.0-blue.svg"></a>
-  <a href="#直接调用的-skill"><img alt="21 research Skills" src="https://img.shields.io/badge/research%20Skills-21-6f42c1.svg"></a>
+  <a href="VERSION"><img alt="Version: v0.11.0" src="https://img.shields.io/badge/version-v0.11.0-blue.svg"></a>
+  <a href="#4-个对外入口"><img alt="4 public entries" src="https://img.shields.io/badge/public%20entries-4-6f42c1.svg"></a>
   <a href="#安装"><img alt="Works with Agent Skills" src="https://img.shields.io/badge/works%20with-Agent%20Skills-0969da.svg"></a>
   <a href="evals/cross-model/results/2026-07-20-cross-model-v2/summary.md"><img alt="Cross-model record: 4 models" src="https://img.shields.io/badge/cross--model%20record-4%20models-2ea44f.svg"></a>
   <a href="CONTRIBUTING.md"><img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
@@ -17,14 +17,14 @@
   <a href="#新手从这里开始">快速开始</a> ·
   <a href="#安装">安装</a> ·
   <a href="#常见场景与当前入口">常见场景</a> ·
-  <a href="#直接调用的-skill">全部 Skill</a> ·
+  <a href="#4-个对外入口">4 个入口</a> ·
   <a href="#知识与验收">验证记录</a> ·
   <a href="CONTRIBUTING.md">贡献</a>
 </p>
 
 ---
 
-RW Research Skill 由 Roland Wayne 创建。当前版本：`v0.10.0`。当前包含 21 个科研 Skill、540 条知识原子、170 条公理、143 个案例和反例，以及 146 条行为合同。
+RW Research Skill 由 Roland Wayne 创建。当前版本：`v0.11.0`。对外提供 4 个入口，内部保留 21 个科研 Skill。当前包含 540 条知识原子、170 条公理、143 个案例和反例，以及 160 条行为合同。
 
 适用于手上有研究想法、论文、数据、研究方案、章节草稿或审稿意见，需要判断下一步的人。你可以直接提交材料，也可以只说现在卡在哪里。系统会选择一个主 Skill，每次处理当前一步。
 
@@ -90,7 +90,7 @@ $rw-research-learning 扫描这个文件夹，然后带我学系统综述：<fol
 npx -y skills add rolandwonglonam/rw-research-skill --list
 ```
 
-只安装研究入口：
+只安装一个研究入口：
 
 ```bash
 npx -y skills add rolandwonglonam/rw-research-skill -g --skill rw-research-router
@@ -104,15 +104,21 @@ npx -y skills add rolandwonglonam/rw-research-skill -g --skill rw-claim-audit
 
 `npx -y` 会下载并执行 `skills` CLI，`-g` 会写入全局 Skill 目录。先确认仓库地址、目标目录和安装范围。
 
-### 安装全部 Skill
+### 安装 4 个对外入口
 
-需要整套科研路由时，可以安装全部 21 个 Skill：
+默认安装只包含 4 个对外入口：
 
 ```bash
 npx -y skills add rolandwonglonam/rw-research-skill -g --all
 ```
 
-如果已经有科研路由、审计或写作系统，先按需安装，避免增加重复入口。
+其余 17 个 Skill 标记为内部模块，不出现在默认安装清单中。需要兼容旧调用或检查内部模块时，显式开启内部安装：
+
+```bash
+INSTALL_INTERNAL_SKILLS=1 npx -y skills add rolandwonglonam/rw-research-skill -g --all
+```
+
+内部安装会增加入口数量。普通用户不需要使用这个模式。
 
 安装后没有立即出现新入口时，新建一次对话再使用。
 
@@ -132,124 +138,27 @@ npx -y skills check
 
 ## 常见场景与当前入口
 
-RW Research Skill 每次选择一个主流程。下面使用 `$skill-name` 表示 Codex 入口；在其他 Agent 中可以直接说“使用 skill-name”。
-
-### 不知道从哪里开始
+RW Research Skill 每次选择一个主流程。用户只需要选择下面 4 个入口。入口再调用内部模块。
 
 ```text
-$rw-research-router 新手入门
+$rw-research-router 我不知道从哪里开始，请判断当前一步。
+$rw-paper-extractor 精读这些论文，提取图表和证据，并核验关键主张。
+$rw-research-referee 检查这个研究的综述方法、设计、材料、统计和结论边界。
+$rw-phd-write 根据现有证据处理这份论文写作、修改或投稿任务。
 ```
 
-有可读材料时，入口先调用 `rw-research-learning`。它先发现内容范围，再建立本地索引，从原文中判断你已使用、已表达、有接触和暂时无证据的内容，然后给出第一份学习产物。
+## 4 个对外入口
 
-```text
-$rw-research-learning 因果推断
-$rw-research-learning 扫描 <folder>，根据我现有的内容带我学习。
-```
-
-### 从研究兴趣形成问题
-
-```text
-$rw-research-question 我想研究……，帮我把它变成可检索、可证伪的问题。
-```
-
-先确认对象、构念、边界和可能推翻结论的证据，再决定是否进入文献发现或研究设计。
-
-### 查找并整理文献
-
-```text
-$rw-search-strategy 把这个英文研究问题生成 PubMed、Embase、CINAHL 和 PsycINFO 检索策略：……
-$rw-literature-discovery 为这个判断寻找并核验文献：……
-$rw-paper-extractor 从这些论文中提取研究设计、样本、测量和结果。
-$rw-evidence-map 把这些研究的支持、冲突、偏倚和缺口连起来。
-```
-
-`rw-search-strategy` 保留原语言，建立英文规范概念和自由词。MeSH 可通过 NLM 接口核验；Emtree、CINAHL Headings 和 APA Thesaurus 需要订阅平台、授权接口或用户提供的核验记录。PubMed、Ovid MEDLINE、Embase.com、Ovid Embase、EBSCOhost CINAHL、3 个 PsycINFO 平台分别生成。
-
-文献存在、检索策略、字段提取和证据关系分开处理。找到论文不等于论文支持当前主张。
-
-### 从证据空白形成研究方向
-
-```text
-$rw-research-novelty 根据这组证据冲突，生成可以继续验证的候选创新点。
-```
-
-候选方向需要标出证据来源、贡献、可行性和证伪条件。没有完成检索时，不使用“首次”或“从未研究”等表述。
-
-### 设计研究或投稿前找漏洞
-
-```text
-$rw-research-design 把这个研究问题转成设计、样本、测量和分析计划。
-$rw-research-referee 在执行前检查偏倚、替代解释和结论边界。
-```
-
-研究设计负责形成方案；研究审查负责攻击方案。两者不在同一步混用。
-
-### 检查研究材料和统计报告
-
-```text
-$rw-research-data 检查这篇论文的数据、代码和补充材料能否取得，并整理数据声明。
-$rw-statistics-audit 核对这篇文稿的分析单位、重复层级、统计方法和报告数字。
-```
-
-研究材料审查处理对象、版本、访问路径和限制。统计审查处理报告是否对得上；没有原始数据和代码时，不声称已经重新分析。
-
-### 写作、核验和局部修改
-
-```text
-$rw-phd-write 判断当前部分的写作功能，连接证据、解释和研究问题，不补造来源。
-$rw-phd-tone 保留我的学术语气，只改影响理解的部分。
-$rw-citation-audit 核对文内引用、参考文献、作者、年份和 DOI。
-$rw-claim-audit 检查每个事实主张是否被指定来源原文支持。
-$rw-revision-patch 只修改我批准的 Markdown 段落，其他内容保持不动。
-```
-
-写作、语气、来源核验和局部修改各自保留边界。需要改稿时，先确认问题属于哪一层。
-
-### 准备投稿
-
-```text
-$rw-journal-submission 核验目标期刊要求，并整理投稿文件和审稿回复。
-```
-
-期刊要求、费用、政策和投稿入口可能变化。执行时回到期刊官方页面核验日期和版本。
-
-### 管理项目状态或选择科研工具
-
-```text
-$rw-research-passport 为这个研究项目建立可以交接的状态档案。
-$rw-research-lab-router 根据任务、数据和当前环境选择工具。
-```
-
-项目状态保存研究材料和判断；工具路由只负责执行环境，不代替研究设计。
-
-## 直接调用的 Skill
-
-| 目标 | Skill |
+| 入口 | 处理范围 |
 | --- | --- |
-| 判断当前研究阶段和下一步 | `rw-research-router` |
-| 扫描本地研究积累，判断基础并选择学习起点 | `rw-research-learning` |
-| 把研究兴趣变成问题 | `rw-research-question` |
-| 发现并核验文献 | `rw-literature-discovery` |
-| 生成并核验多数据库受控词和分平台检索式 | `rw-search-strategy` |
-| 从论文和补充材料提取字段 | `rw-paper-extractor` |
-| 整理证据关系、冲突、偏倚和缺口 | `rw-evidence-map` |
-| 生成并筛选候选创新点 | `rw-research-novelty` |
-| 设计系统综述、范围综述和证据综合流程 | `rw-review-methods` |
-| 建立研究设计、样本、测量和分析计划 | `rw-research-design` |
-| 审查数据、代码和材料的访问与声明 | `rw-research-data` |
-| 审查分析单位、重复层级和统计报告 | `rw-statistics-audit` |
-| 在执行或投稿前检查研究漏洞 | `rw-research-referee` |
-| 保存单个研究项目的状态和交接记录 | `rw-research-passport` |
-| 核对文内引用、参考文献、作者、年份和 DOI | `rw-citation-audit` |
-| 核验主张是否被指定来源支持 | `rw-claim-audit` |
-| 对批准的 Markdown 块执行局部修改 | `rw-revision-patch` |
-| 判断科研文本的写作功能，组织证据、解释和研究问题连接 | `rw-phd-write` |
-| 提取并保持作者的学术语气 | `rw-phd-tone` |
-| 核验期刊并准备投稿和审稿回复 | `rw-journal-submission` |
-| 根据任务和环境选择科研工具 | `rw-research-lab-router` |
+| `rw-research-router` | 学习起点、研究问题、文献发现、检索策略、创新方向、项目状态和工具接续 |
+| `rw-paper-extractor` | PDF 工作区、章节和图表提取、分阶段精读、证据关系、引用和主张核验 |
+| `rw-research-referee` | 综述方法、研究设计、研究材料、统计报告和结论审查 |
+| `rw-phd-write` | 科研写作、作者语气、局部修订、审稿回复和投稿材料 |
 
-完整的前后关系见 [Skill 关系图](docs/skill-link-map.md)。
+21 个内部 Skill 仍可按原名称直接调用，用于兼容已有流程。对外入口和内部归属由 [`manifest.json`](manifest.json) 统一维护。完整前后关系见 [Skill 关系图](docs/skill-link-map.md)。
+
+依赖不可用、材料不足或上游产物变化时，处理规则见 [degradation registry](docs/degradation-registry.json)。它记录状态、替代动作、禁止行为、用户提示、责任 Skill 和对应测试。4 个入口的合成场景见 [degradation scenarios](docs/degradation-scenarios.json)。
 
 ## 项目状态与接续
 
@@ -272,7 +181,7 @@ $rw-research-lab-router 根据任务、数据和当前环境选择工具。
 - 540 条结构化知识原子。
 - 170 条运行公理。
 - 143 个案例和反例。
-- 146 条行为合同。
+- 160 条行为合同。
 - 21 个独立运行静态自检脚本。
 
 行为合同保存提示词、应做事项、不应做事项和下一步，用于后续模型评测。静态自检只检查文件、结构、数量和独立运行约束，不代表模型已经执行全部行为合同，也不证明真实任务提效。
@@ -285,7 +194,17 @@ v0.8.0 增加真实文档审阅入口。默认使用本机已登录的 Codex 和
 
 每个 Skill 自带适用方法、来源入口、停止条件、案例、反例、工作表和自检。需要当前文献、API、期刊政策或报告规范时，仍需核验官方来源。
 
-发布检查结果见 [v0.10.0 验证记录](docs/validation.md)。
+发布检查结果见 [v0.11.0 验证记录](docs/validation.md)。
+
+## v0.11.0 更新
+
+- 将 21 个科研 Skill 收到 `rw-research-router`、`rw-paper-extractor`、`rw-research-referee` 和 `rw-phd-write` 4 个对外入口下。
+- 17 个内部 Skill 使用 `metadata.internal: true`，默认发现和安装后的普通列表只显示 4 个入口。内部模式仍可发现和调用全部 21 个 Skill。
+- `manifest.json` 记录每个内部 Skill 的唯一入口归属。
+- `ci/manifest.json` 统一本地、Pull Request、main 分支和 GitHub Release 的检查。
+- `docs/degradation-registry.json` 记录降级状态、替代动作、禁止行为和责任 Skill。
+- 为每个入口增加 2 个确定性降级场景，并用真实 Agent 各运行 1 个前向场景。
+- 前向测试只说明这 4 个合成提示中的行为，不表示所有模型和任务都会照做。
 
 ## v0.10.0 更新
 
@@ -363,16 +282,16 @@ v0.8.0 增加真实文档审阅入口。默认使用本机已登录的 Codex 和
 
 ```bash
 python3 scripts/sync_from_workspace.py
-python3 scripts/build_release.py
+python3 scripts/run_ci_manifest.py
 ```
 
 发布包生成在：
 
 ```text
-dist/rw-research-skill-0.10.0.zip
+dist/rw-research-skill-0.11.0.zip
 ```
 
-构建过程检查版本一致性、Skill 结构和 21 个独立运行静态自检。
+本地、Pull Request、main 分支和 GitHub Release 共用 [`ci/manifest.json`](ci/manifest.json)。构建过程检查版本、4 个对外入口、21 个内部 Skill、降级注册表、公开边界、确定性测试和 2 种发行包。
 
 ## License
 

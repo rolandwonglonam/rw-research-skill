@@ -1,5 +1,7 @@
 ---
 name: rw-research-learning
+metadata:
+  internal: true
 description: |
   发现并扫描用户可读的本地积累或指定文件夹，根据材料归属、当前版本以及用户已写、已解释和已应用的内容判断可见研究基础，选择学习起点并生成第一份学习产物。Use when the user asks for “带我学一个科研主题”“扫描这个文件夹再教我”“分析我的科研能力”“看看我会什么”“根据我的本地内容决定下一步”“我不知道科研或 PhD 从哪里开始”，or requests the rw-research-learning workflow.
 ---

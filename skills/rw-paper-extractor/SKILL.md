@@ -8,6 +8,15 @@ description: |
 
 从论文和补充材料中提取结构化字段、原文位置、缺失项和可支持的判断。
 
+## 对外入口职责
+
+这是“论文精读与证据”入口。用户可以提交 PDF、补充材料、论文卡片或待核验主张。
+
+- 本入口处理 Paper Case、章节、图表、分阶段精读报告和证据定位。
+- 需要整理证据关系时接续 `rw-evidence-map`。
+- 需要核验引用身份或主张支持时接续 `rw-citation-audit` 或 `rw-claim-audit`。
+- 对外保持一个任务入口，内部接续不改变来源定位、复核状态和门禁。
+
 ## 启动
 
 1. 读取 `references/standalone.md`、`references/method.md` 和 `references/standards.md`。

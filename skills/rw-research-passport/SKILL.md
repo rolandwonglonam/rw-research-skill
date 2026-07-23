@@ -1,5 +1,7 @@
 ---
 name: rw-research-passport
+metadata:
+  internal: true
 description: |
   为单个研究项目建立和维护可审计的 JSON 状态文件，记录研究阶段、材料、判断、未知项、交接和变更日志。Use when the user asks for“建立研究档案”“保存这个研究项目的材料状态”“把文献、判断和下一步交给另一个科研 Skill”“检查研究状态文件”,or requests the rw-research-passport workflow.
 ---

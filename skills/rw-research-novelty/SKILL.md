@@ -1,5 +1,7 @@
 ---
 name: rw-research-novelty
+metadata:
+  internal: true
 description: |
   把证据空白、冲突和异常转成可追溯的候选创新点，并按贡献、可行性和证伪条件筛选。 Use when the user asks for “找科研创新点”、“从文献 gap 生成研究方向”、“筛选候选创新点”、“头脑风暴研究方向”, or requests the rw-research-novelty workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---

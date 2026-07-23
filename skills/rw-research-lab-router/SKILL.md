@@ -1,5 +1,7 @@
 ---
 name: rw-research-lab-router
+metadata:
+  internal: true
 description: |
   根据科研任务、数据和运行环境选择可用工具；没有预设本地 research-lab 也能工作。 Use when the user asks for “科研任务用哪个工具”、“帮我选科研工具”、“这个 repo 有用吗”, or requests the rw-research-lab-router workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---

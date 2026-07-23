@@ -13,15 +13,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Check public corpus privacy
-        run: python3 scripts/check_public_privacy.py
-      - name: Check repository metadata
-        run: python3 scripts/check_repository.py
-      - name: Check cross-model evaluation definitions
-        run: python3 scripts/cross_model_eval.py check
-      - name: Run deterministic tool tests
-        run: python3 -m unittest discover -s tests -v
-      - name: Build full release
-        run: python3 scripts/build_release.py
-      - name: Build SkillHub release
-        run: python3 scripts/build_skillhub_release.py
+      - name: Run CI manifest
+        run: python3 scripts/run_ci_manifest.py

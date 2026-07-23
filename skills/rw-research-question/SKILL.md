@@ -1,5 +1,7 @@
 ---
 name: rw-research-question
+metadata:
+  internal: true
 description: |
   把研究兴趣转成可界定、可检索、可证伪和可执行的问题。 Use when the user asks for “帮我定研究问题”、“这个课题能不能做”、“把兴趣变成 RQ”, or requests the rw-research-question workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---

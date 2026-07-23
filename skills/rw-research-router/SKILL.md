@@ -8,6 +8,15 @@ description: |
 
 判断科研任务所处阶段，并把它交给一个主流程。
 
+## 对外入口职责
+
+这是“研究启动与推进”入口。用户不需要先选择内部 Skill。
+
+- 学习起点、研究问题、文献发现、检索策略和创新方向由本入口判断后接续。
+- 项目状态和工具选择也从本入口进入。
+- 内部可接续 `rw-research-learning`、`rw-research-question`、`rw-literature-discovery`、`rw-search-strategy`、`rw-research-novelty`、`rw-research-passport` 和 `rw-research-lab-router`。
+- 对用户只说明当前主任务、所需材料、停止条件和下一步，不先展示内部清单。
+
 ## 启动
 
 1. 读取 `references/standalone.md`、`references/method.md` 和 `references/standards.md`。

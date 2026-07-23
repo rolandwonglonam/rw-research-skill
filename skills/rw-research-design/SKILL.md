@@ -1,5 +1,7 @@
 ---
 name: rw-research-design
+metadata:
+  internal: true
 description: |
   把研究问题转成构念、设计、样本、测量、分析、证伪和执行计划。 Use when the user asks for “设计研究”、“这个方法能回答问题吗”、“帮我做研究方案”, or requests the rw-research-design workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---

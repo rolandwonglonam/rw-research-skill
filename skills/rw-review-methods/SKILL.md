@@ -1,5 +1,7 @@
 ---
 name: rw-review-methods
+metadata:
+  internal: true
 description: |
   设计和执行可复现的系统综述、范围综述及其他证据综合流程。 Use when the user asks for “做系统综述”、“范围综述怎么做”、“设计筛选流程”, or requests the rw-review-methods workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---

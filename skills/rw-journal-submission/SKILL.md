@@ -1,5 +1,7 @@
 ---
 name: rw-journal-submission
+metadata:
+  internal: true
 description: |
   核验期刊、准备投稿文件、检查披露，并组织审稿回复和修改证据。 Use when the user asks for “准备投稿”、“选期刊”、“回复审稿意见”, or requests the rw-journal-submission workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---

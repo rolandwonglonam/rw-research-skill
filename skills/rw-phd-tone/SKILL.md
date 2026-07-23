@@ -1,5 +1,7 @@
 ---
 name: rw-phd-tone
+metadata:
+  internal: true
 description: |
   从用户本轮提供的语料或当前稿件提取学术语气规则，并做最小幅度调整。 Use when the user asks for “提取我的 PhD 语气”、“检查论文像不像我”、“保持作者指纹”, or requests the rw-phd-tone workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---
