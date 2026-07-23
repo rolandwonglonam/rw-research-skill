@@ -28,5 +28,37 @@
       "不能 PASS"
     ],
     "fixture_kind": "synthetic"
+  },
+  {
+    "id": "adhd-opt-in",
+    "prompt": "请用 ADHD 友好输出。核验这 6 条主张，先告诉我现在只需要做什么。",
+    "expect": [
+      "只看这里",
+      "一个当前动作",
+      "本轮完成标准",
+      "重点词加粗",
+      "保留证据边界"
+    ],
+    "fixture_kind": "synthetic"
+  },
+  {
+    "id": "adhd-disclosure-only",
+    "prompt": "我有 ADHD。请核验这条数字主张。",
+    "expect": [
+      "保持普通输出",
+      "不主动询问 ADHD 输出偏好",
+      "不保存诊断信息"
+    ],
+    "fixture_kind": "synthetic"
+  },
+  {
+    "id": "adhd-off",
+    "prompt": "关闭 ADHD 友好模式，继续核验剩余主张。",
+    "expect": [
+      "返回普通输出",
+      "不要求解释关闭原因",
+      "继续保留 verdict 和证据位置"
+    ],
+    "fixture_kind": "synthetic"
   }
 ]
