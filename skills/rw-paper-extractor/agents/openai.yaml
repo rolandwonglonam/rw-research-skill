@@ -1,4 +1,4 @@
 interface:
   display_name: "RW Paper Extractor"
-  short_description: "从论文和补充材料中提取结构化字段、原文位置、缺失项和可支持的判断。"
-  default_prompt: "Use $rw-paper-extractor to 从论文和补充材料中提取结构化字段、原文位置、缺失项和可支持的判断。"
+  short_description: "提取论文字段、章节、图表和证据定位，生成分阶段精读报告。"
+  default_prompt: "Use $rw-paper-extractor to 建立这篇 PDF 的 Paper Case，提取图表并生成分阶段精读报告。"

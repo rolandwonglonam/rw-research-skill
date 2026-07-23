@@ -1,6 +1,6 @@
 <p align="center">
   <a href="LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-2ea44f.svg"></a>
-  <a href="VERSION"><img alt="Version: v0.8.0" src="https://img.shields.io/badge/version-v0.8.0-blue.svg"></a>
+  <a href="VERSION"><img alt="Version: v0.9.0" src="https://img.shields.io/badge/version-v0.9.0-blue.svg"></a>
   <a href="#直接调用的-skill"><img alt="20 research Skills" src="https://img.shields.io/badge/research%20Skills-20-6f42c1.svg"></a>
   <a href="#安装"><img alt="Works with Agent Skills" src="https://img.shields.io/badge/works%20with-Agent%20Skills-0969da.svg"></a>
   <a href="evals/cross-model/results/2026-07-20-cross-model-v2/summary.md"><img alt="Cross-model record: 4 models" src="https://img.shields.io/badge/cross--model%20record-4%20models-2ea44f.svg"></a>
@@ -24,7 +24,7 @@
 
 ---
 
-RW Research Skill 由 Roland Wayne 创建。当前版本：`v0.8.0`。当前包含 20 个科研 Skill、500 条知识原子、163 条公理、128 个案例和反例，以及 131 条行为合同。
+RW Research Skill 由 Roland Wayne 创建。当前版本：`v0.9.0`。当前包含 20 个科研 Skill、505 条知识原子、163 条公理、130 个案例和反例，以及 133 条行为合同。
 
 适用于手上有研究想法、论文、数据、研究方案、章节草稿或审稿意见，需要判断下一步的人。你可以直接提交材料，也可以只说现在卡在哪里。系统会选择一个主 Skill，每次处理当前一步。
 
@@ -264,10 +264,10 @@ $rw-research-lab-router 根据任务、数据和当前环境选择工具。
 
 公开包当前包含：
 
-- 500 条结构化知识原子。
+- 505 条结构化知识原子。
 - 163 条运行公理。
-- 128 个案例和反例。
-- 131 条行为合同。
+- 130 个案例和反例。
+- 133 条行为合同。
 - 20 个独立运行静态自检脚本。
 
 行为合同保存提示词、应做事项、不应做事项和下一步，用于后续模型评测。静态自检只检查文件、结构、数量和独立运行约束，不代表模型已经执行全部行为合同，也不证明真实任务提效。
@@ -280,7 +280,16 @@ v0.8.0 增加真实文档审阅入口。默认使用本机已登录的 Codex 和
 
 每个 Skill 自带适用方法、来源入口、停止条件、案例、反例、工作表和自检。需要当前文献、API、期刊政策或报告规范时，仍需核验官方来源。
 
-发布检查结果见 [v0.8.0 验证记录](docs/validation.md)。
+发布检查结果见 [v0.9.0 验证记录](docs/validation.md)。
+
+## v0.9.0 更新
+
+- `rw-paper-extractor` 增加带来源 hash 和配置 hash 的 PDF Paper Case。
+- 增加章节识别依据、置信度和人工修正入口，减少参考文献条目被识别成章节的问题。
+- 增加图表候选提取和跨页表格拼接；拼接图保留各页的 page、bbox 和 text unit 定位。
+- 增加 5 阶段精读报告、阶段状态和 STALE 传播。
+- 候选主张先进入 `rw-claim-audit`；只有门禁为 PASS 才能生成 LitNet 回写预览。
+- LitNet 接口只生成预览，不写 Zotero，也不自动改正式卡片。
 
 ## v0.8.0 更新
 
@@ -344,7 +353,7 @@ python3 scripts/build_release.py
 发布包生成在：
 
 ```text
-dist/rw-research-skill-0.8.0.zip
+dist/rw-research-skill-0.9.0.zip
 ```
 
 构建过程检查版本一致性、Skill 结构和 20 个独立运行静态自检。

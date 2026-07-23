@@ -13,9 +13,13 @@
 - 至少有 24 条知识原子、8 条公理和 6 个行为测试。
 - 行为测试包含至少 4 个正常案例和 2 个停止条件反例。
 - 输出包含：结构化论文卡片或批量表。、原文定位、置信度和复核状态。、缺失项、冲突和待补材料。
+- Paper Case 模式保存来源 hash、配置 hash、文本 locator、视觉分段 locator 和阶段状态。
+- 跨页表格拼接后仍能回到每一页的 bbox。
+- LitNet 接续只生成预览，不能绕过 Claim Audit 门禁直接写入。
 
 ## 结构
 
 - `SKILL.md` 只有 `name` 和 `description` 两个前置字段。
 - `python3 scripts/self_check.py` 通过。
+- `python3 -m unittest -v tests/test_paper_case.py` 通过。
 - `quick_validate.py` 通过。

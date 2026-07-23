@@ -17,6 +17,7 @@ def main() -> int:
         "references/method.md", "references/domain-guide.md", "references/atoms.jsonl",
         "references/axioms.md", "references/cases.md", "references/behavior-tests.json",
         "references/acceptance.md", "references/source-evidence.md", "references/maturity.json",
+        "references/paper-case.md", "scripts/paper_case.py", "tests/test_paper_case.py",
     ]
     for relative in required:
         path = root / relative
