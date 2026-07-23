@@ -55,6 +55,24 @@
   },
   {
     "id": "case-4",
+    "prompt": "我有英文研究问题，需要 PubMed、Embase 和 PsycINFO 的受控词与检索式。",
+    "must_do": [
+      "保留用户原问题和预期交付物。",
+      "完成当前阶段后给出一个下一步，不同时启动整条链。",
+      "阶段诊断和主 Skill。"
+    ],
+    "must_not": [
+      "依赖未提供的本地工作区内容",
+      "生成不存在的论文、数据、DOI、工具结果或期刊要求",
+      "越过停止条件：没有可识别的交付物时，先澄清，不分配批量任务。"
+    ],
+    "expected_next": [
+      "rw-search-strategy"
+    ],
+    "fixture_kind": "synthetic"
+  },
+  {
+    "id": "case-5",
     "prompt": "我有完整研究设计，想在投稿前找漏洞。",
     "must_do": [
       "保留用户原问题和预期交付物。",
@@ -72,7 +90,7 @@
     "fixture_kind": "synthetic"
   },
   {
-    "id": "case-5",
+    "id": "case-6",
     "prompt": "我已经整理出文献冲突和证据空白，想筛选能做的创新点。",
     "must_do": [
       "保留用户原问题和预期交付物。",
@@ -90,7 +108,7 @@
     "fixture_kind": "synthetic"
   },
   {
-    "id": "case-6",
+    "id": "case-7",
     "prompt": "投稿前检查数据、代码和材料声明是否真实可取得。",
     "must_do": [
       "保留用户原问题和预期交付物。",
@@ -108,7 +126,7 @@
     "fixture_kind": "synthetic"
   },
   {
-    "id": "case-7",
+    "id": "case-8",
     "prompt": "检查论文中的 n、技术重复和统计报告。",
     "must_do": [
       "保留用户原问题和预期交付物。",
@@ -126,25 +144,25 @@
     "fixture_kind": "synthetic"
   },
   {
-    "id": "case-8",
+    "id": "case-9",
     "prompt": "新手入门。我不知道该用哪个 Skill。",
     "must_do": [
-      "主动发现当前可读项目或用户指定路径",
-      "选择 rw-research-learning 扫描用户现有积累",
-      "完成基础判断后再选择后续主 Skill"
+      "先问用户手上有什么，一轮只问一个问题",
+      "不展示完整 Skill 清单",
+      "根据回答选择一个主 Skill"
     ],
     "must_not": [
-      "先要求用户自评研究基础",
+      "要求用户先理解全部工作流",
       "同时启动多个 Skill",
       "在没有任务材料时猜测研究事实"
     ],
     "expected_next": [
-      "rw-research-learning"
+      ""
     ],
     "fixture_kind": "synthetic"
   },
   {
-    "id": "counterexample-9",
+    "id": "counterexample-10",
     "prompt": "没有研究问题，直接替我写整篇论文。",
     "must_do": [
       "说明停止条件、缺失信息和可安全继续的部分"
@@ -158,7 +176,7 @@
     "fixture_kind": "synthetic"
   },
   {
-    "id": "counterexample-10",
+    "id": "counterexample-11",
     "prompt": "本机没有私人工作区，所以这个科研 Skill 不能运行。",
     "must_do": [
       "说明停止条件、缺失信息和可安全继续的部分"

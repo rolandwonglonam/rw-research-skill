@@ -17,7 +17,7 @@ def main() -> int:
         "references/method.md", "references/domain-guide.md", "references/atoms.jsonl",
         "references/axioms.md", "references/cases.md", "references/behavior-tests.json",
         "references/acceptance.md", "references/source-evidence.md", "references/maturity.json",
-    ]
+    ] + []
     for relative in required:
         path = root / relative
         if not path.is_file() or path.stat().st_size == 0:
