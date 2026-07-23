@@ -6,6 +6,7 @@ flowchart LR
   learning["rw-research-learning"]
   question["rw-research-question"]
   discovery["rw-literature-discovery"]
+  search["rw-search-strategy"]
   extractor["rw-paper-extractor"]
   evidence["rw-evidence-map"]
   novelty["rw-research-novelty"]
@@ -31,6 +32,7 @@ flowchart LR
   learning --> audit
   router --> question
   router --> discovery
+  router --> search
   router --> novelty
   router --> data
   router --> stats
@@ -40,7 +42,9 @@ flowchart LR
   router --> patch
   router --> tools
   question --> discovery
+  question --> search
   question --> design
+  discovery --> search
   discovery --> extractor
   discovery --> evidence
   extractor --> evidence
@@ -55,6 +59,7 @@ flowchart LR
   novelty --> design
   novelty --> referee
   review --> evidence
+  review --> search
   review --> referee
   design --> referee
   design --> stats
@@ -91,6 +96,7 @@ flowchart LR
   submission --> stats
   submission --> referee
   tools --> discovery
+  tools --> search
   tools --> review
   tools --> design
 ```

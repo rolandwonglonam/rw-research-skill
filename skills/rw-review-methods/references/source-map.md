@@ -16,8 +16,8 @@
 - [GRADE Book](https://book.gradepro.org/)：评价证据确定性和从证据到决策。
 - [Cochrane Risk of Bias 2](https://methods.cochrane.org/bias/resources/rob-2-revised-cochrane-risk-bias-tool-randomized-trials)：评价随机试验特定结果的偏倚风险。
 - [ROBINS-I](https://methods.cochrane.org/news/new-robins-i-guidance)：评价非随机干预研究的偏倚风险。
-- [OSF Registrations](https://help.osf.io/article/330-welcome-to-registrations)：建立带时间戳、只读的协议注册记录。
-- [PROSPERO eligibility guidance](https://www.crd.york.ac.uk/prospero/documents/Registering%20a%20review%20on%20PROSPERO.pdf)：核验综述类型的注册资格；范围综述当前不符合资格。
+- [OSF Registrations](https://help.osf.io/article/330-welcome-to-registrations)：在正式检索前保存带时间戳、只读的协议和检索策略版本。
+- [PROSPERO eligibility guidance](https://www.crd.york.ac.uk/prospero/documents/Registering%20a%20review%20on%20PROSPERO.pdf)：判断综述类型是否符合 PROSPERO 资格；当前不接收范围综述。
 
 ## 使用规则
 

@@ -2,34 +2,27 @@
 
 ## 综述类型和问题
 
-- 
+-
 
 ## 协议和注册
 
-- 注册是否为正式检索前置条件：
-- Registry：
-- Registration ID：
-- Registration URL：
-- Registered at，含时区：
-- Protocol version 和 SHA-256：
-- Search strategy files 和 SHA-256：
-- Gate status：pending／accepted／blocked
+-
 
 ## 信息来源和搜索式
 
-- 
+-
 
 ## 筛选与冲突
 
-- 
+-
 
 ## 提取与偏倚
 
-- 
+-
 
 ## 综合、偏离和报告
 
-- 
+-
 
 ## 已确认事实、推断和未知事项
 

@@ -1,7 +1,7 @@
 {
   "skill": "rw-literature-discovery",
   "version": "standalone-v1",
-  "generated_at": "2026-07-16",
+  "generated_at": "2026-07-23",
   "standalone": true,
   "local_hard_dependencies": [],
   "optional_integrations": [
@@ -9,9 +9,9 @@
     "internet access",
     "other RW skills"
   ],
-  "atom_count": 31,
+  "atom_count": 32,
   "axiom_count": 8,
-  "behavior_test_count": 6,
+  "behavior_test_count": 7,
   "public_source_count": 4,
   "grounding_status": "public-source-grounded"
 }

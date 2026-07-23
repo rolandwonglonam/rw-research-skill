@@ -2,8 +2,8 @@
 
 | 情形 | 执行动作 | 不要做 |
 |---|---|---|
-| 不知道从哪里开始，或希望根据已有资料学习 | 进入 rw-research-learning | 先让用户自评基础或自选 Skill |
 | 研究兴趣仍宽泛 | 进入 rw-research-question | 直接写章节 |
+| 需要 MeSH、Emtree、CINAHL Headings、APA Thesaurus 或平台检索式 | 进入 rw-search-strategy | 把关键词清单当成数据库策略 |
 | 需要找文献或补论证 | 进入 rw-literature-discovery | 先建证据结论 |
 | 已有一批论文但字段未统一 | 进入 rw-paper-extractor | 直接综合 |
 | 已有结构化研究记录 | 进入 rw-evidence-map | 继续无边界检索 |
@@ -11,8 +11,6 @@
 | 需要核对数据、代码、材料或数据声明 | 进入 rw-research-data | 把一句可用性声明当成访问证据 |
 | 需要核对 n、重复层级、统计方法或报告数字 | 进入 rw-statistics-audit | 在没有数据时声称重新分析 |
 | 结论或设计可能站不住 | 进入 rw-research-referee | 先润色 |
-| 需要核对来源原文是否支持具体主张 | 进入 rw-claim-audit | 把引用格式正确当成主张已被支持 |
-| 需要核对正文引用、参考文献身份、同年后缀或 DOI 格式 | 进入 rw-citation-audit | 扩大为来源是否支持主张的审查 |
 
 ## 核心规则
 
@@ -29,4 +27,3 @@
 - 用户提供的原始材料优先于 Skill 内的通用示例。
 - 本地集成不存在时，使用自带路由表继续。
 - 新手入门时一次只问一个问题，不把整个科研流程一次发给用户。
-- 有可读资料时，新手入门先进入 `rw-research-learning` 主动扫描，不用问卷代替本地证据。

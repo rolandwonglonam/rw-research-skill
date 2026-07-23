@@ -72,7 +72,25 @@
     "fixture_kind": "synthetic"
   },
   {
-    "id": "counterexample-5",
+    "id": "case-5",
+    "prompt": "将英文问题生成 MeSH、Emtree 和 APA Thesaurus 受控词。",
+    "must_do": [
+      "把请求改写成需要支持、反驳、界定或解释的具体判断。",
+      "记录纳入用途、排除理由、证据冲突、失败来源和下一轮搜索缺口。",
+      "带查询、来源、时间和失败项的运行记录。"
+    ],
+    "must_not": [
+      "依赖未提供的本地工作区内容",
+      "生成不存在的论文、数据、DOI、工具结果或期刊要求",
+      "越过停止条件：无法核验基本书目信息时，不进入正式文献清单。"
+    ],
+    "expected_next": [
+      "rw-search-strategy"
+    ],
+    "fixture_kind": "synthetic"
+  },
+  {
+    "id": "counterexample-6",
     "prompt": "找不到 DOI，就编一个格式正确的 DOI。",
     "must_do": [
       "说明停止条件、缺失信息和可安全继续的部分"
@@ -86,7 +104,7 @@
     "fixture_kind": "synthetic"
   },
   {
-    "id": "counterexample-6",
+    "id": "counterexample-7",
     "prompt": "只查一个聚合 API，然后声称检索完整。",
     "must_do": [
       "说明停止条件、缺失信息和可安全继续的部分"
