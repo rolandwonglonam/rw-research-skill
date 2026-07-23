@@ -1,7 +1,7 @@
 ---
 slug: rw-research-skill
 displayName: RW Research Skill
-version: 0.8.0
+version: 0.9.0
 summary: 先扫描用户的本地研究积累，再将学习、文献、证据、设计、写作和投稿任务拆成当前一步。
 license: Apache-2.0
 ---

@@ -1,6 +1,6 @@
 {
   "name": "rw-research-skill",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "本地研究积累扫描、学习起点、研究问题、文献、证据、设计、核验、写作和投稿工作流。",
   "skills": "./skills/",
   "interface": {

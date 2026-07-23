@@ -1,7 +1,7 @@
 ---
 name: rw-paper-extractor
 description: |
-  从论文和补充材料中提取结构化字段、原文位置、缺失项和可支持的判断。 Use when the user asks for “提取这篇论文”、“批量抽论文信息”、“做论文卡片”, or requests the rw-paper-extractor workflow. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
+  从论文 PDF 和补充材料中提取结构化字段、章节、图表、原文位置、缺失项和可支持的判断，并可建立带 hash 的 Paper Case 和分阶段精读报告。 Use when the user asks for “提取这篇论文”、“批量抽论文信息”、“做论文卡片”、“精读 PDF”、“提取图表” or “分阶段精读报告”. Runs without a private local workspace or preset research-lab; use user-provided material and bundled public-source methods.
 ---
 
 # RW Paper Extractor
@@ -16,6 +16,7 @@ description: |
 4. 需要选择方法或工具时读取 `references/domain-guide.md`，并使用 `assets/worksheet.md` 组织交付。
 5. 读取 `references/acceptance.md`。`references/behavior-tests.json` 只用于测试，不作为用户任务事实。
 6. 当前文献、API、报告规范和期刊要求可能变化时，打开 `references/source-map.md` 中的官方链接核验并记录日期。
+7. 用户需要 PDF 工作区、图表提取或分阶段精读时，读取 `references/paper-case.md`，并使用 `scripts/paper_case.py`。
 
 ## 工作阶段
 
@@ -25,6 +26,15 @@ description: |
 4. 提取研究问题、设计、样本、变量、方法、结果、限制和资金披露。
 5. 为关键字段保存页码、段落、表、图或补充材料位置。
 6. 执行第二遍核对，区分缺失、未报告、不适用和无法判断。
+
+## PDF 精读流程
+
+1. 为原始 PDF 建立 Paper Case，记录来源 hash、配置 hash 和隐私状态。
+2. 生成带 page、bbox 和 text unit 的文本证据；章节识别保留判断依据和置信度。
+3. 提取图表候选。跨页表格生成拼接图，同时保留每一页的独立 locator。
+4. 生成 5 个阶段文件和合并报告脚手架。报告只能使用已有证据单元。
+5. 把候选主张交给 `rw-claim-audit`。门禁为 PASS 后，才生成 LitNet 回写预览。
+6. LitNet 预览不执行写入；Zotero 或用户原始文件仍是来源正典。
 
 ## 运行规则
 
@@ -40,12 +50,16 @@ description: |
 - 批量提取前先用两篇不同结构的论文试表。
 - 机器提取的字段要保留置信度和复核状态。
 - 关键字段修改时保留原值、修改值和理由。
+- 自动识别的章节和图表都要保留置信度或复核状态。
+- 拼接图是阅读产物，不替代原始页码和 bbox。
+- 来源、配置或上游阶段 hash 改变时，将下游结果标为 STALE。
 
 ## 输出
 
 - 结构化论文卡片或批量表。
 - 原文定位、置信度和复核状态。
 - 缺失项、冲突和待补材料。
+- 可选 Paper Case、分阶段报告、Claim Audit 接续和 LitNet 回写预览。
 
 ## 停止条件
 
